@@ -7,14 +7,16 @@
         "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "acdh-oeaw/arche-assets": "^3.25",
+        "acdh-oeaw/arche-lib": "^5.11",
+        "acdh-oeaw/arche-lib-disserv": "^3.0",
+        "acdh-oeaw/arche-lib-schema": "^6.3",
         "symfony/console": "8.0.*",
         "symfony/dotenv": "8.0.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "8.0.*",
         "symfony/runtime": "8.0.*",
         "symfony/yaml": "8.0.*"
-    },
-    "require-dev": {
     },
     "config": {
         "allow-plugins": {
