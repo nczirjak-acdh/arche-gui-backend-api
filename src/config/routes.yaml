@@ -1,4 +1,0 @@
-api_hello:
-  path: /api/hello
-  controller: App\Controller\HelloController
-  methods: [GET]

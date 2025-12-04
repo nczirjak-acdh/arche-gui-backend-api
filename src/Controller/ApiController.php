@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Drupal\Component\Utility\Xss;
+
 
 
 class ApiController extends AbstractController {
@@ -30,8 +30,11 @@ class ApiController extends AbstractController {
      * @param string $lang
      * @return JsonResponse
      */
+    
+    
     public function topCollections(int $count, string $lang = "en"): JsonResponse {
-        $controller = new \Drupal\arche_core_gui_api\Controller\MetadataController();
+        
+        $controller = new App\Controller\MetadataController();
         return $controller->getTopCollections($count, $lang);
     }
 

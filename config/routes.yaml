@@ -9,3 +9,18 @@
 
 controllers:
     resource: routing.controllers
+
+api_test:
+  path: /api/test
+  controller: App\Controller\TestController::index
+  methods: [GET]
+  
+
+arche_api_topcollections:
+  path: '/api/topcollections/{count}/{lang}'
+  controller: 'App\Controller\ApiController::topCollections'
+  requirements:
+    count: '^[^\?]*$'
+    lang: '^[^\?]*$'
+    _permission: 'access content'
+    _access: 'TRUE'  
