@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 
 
@@ -34,7 +35,7 @@ class ApiController extends AbstractController {
     
     public function topCollections(int $count, string $lang = "en"): JsonResponse {
         
-        $controller = new App\Controller\MetadataController();
+        $controller = new \App\Controller\MetadataController();
         return $controller->getTopCollections($count, $lang);
     }
 

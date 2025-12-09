@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a7e90ee850a123d2e018ae4410d7e57",
+    "content-hash": "44af0d79fc822ebae72912bc92e41a6e",
     "packages": [
         {
             "name": "acdh-oeaw/arche-assets",
@@ -52,29 +52,32 @@
         },
         {
             "name": "acdh-oeaw/arche-lib",
-            "version": "5.11.2",
+            "version": "7.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acdh-oeaw/arche-lib.git",
-                "reference": "dce4be7ea4de3ae4f54346da53f20756204ccc8c"
+                "reference": "3e017f8e6fffd5b6afcd9a478269de58552f5497"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acdh-oeaw/arche-lib/zipball/dce4be7ea4de3ae4f54346da53f20756204ccc8c",
-                "reference": "dce4be7ea4de3ae4f54346da53f20756204ccc8c",
+                "url": "https://api.github.com/repos/acdh-oeaw/arche-lib/zipball/3e017f8e6fffd5b6afcd9a478269de58552f5497",
+                "reference": "3e017f8e6fffd5b6afcd9a478269de58552f5497",
                 "shasum": ""
             },
             "require": {
-                "acdh-oeaw/easyrdf": ">=0.13.5",
-                "guzzlehttp/guzzle": "^7 | ^6",
+                "ext-yaml": "*",
+                "guzzlehttp/guzzle": "^7",
                 "php": "^8.1",
-                "psr/log": "*",
-                "zozlak/query-part": "^2",
+                "psr/log": "^2 | ^3",
+                "sweetrdf/quick-rdf": "^2",
+                "sweetrdf/quick-rdf-io": "^1.0.6",
+                "zozlak/guzzle-proxy-client": "^1.1",
+                "zozlak/query-part": "^2.2",
                 "zozlak/rdf-constants": "^1"
             },
             "require-dev": {
                 "phpstan/phpstan": "*",
-                "phpunit/phpunit": "*"
+                "phpunit/phpunit": "^10"
             },
             "type": "library",
             "autoload": {
@@ -96,33 +99,32 @@
             "homepage": "https://github.com/acdh-oeaw/arche-lib",
             "support": {
                 "issues": "https://github.com/acdh-oeaw/arche-lib/issues",
-                "source": "https://github.com/acdh-oeaw/arche-lib/tree/5.11.2"
+                "source": "https://github.com/acdh-oeaw/arche-lib/tree/7.4.0"
             },
-            "time": "2024-04-22T11:22:11+00:00"
+            "time": "2025-06-26T21:47:36+00:00"
         },
         {
             "name": "acdh-oeaw/arche-lib-disserv",
-            "version": "3.0.3",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acdh-oeaw/arche-lib-disserv.git",
-                "reference": "7ab768908495ed23c920d561eedc561ef51377ef"
+                "reference": "6a564c43676badaf212f3fcad010795ebdac3aa1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acdh-oeaw/arche-lib-disserv/zipball/7ab768908495ed23c920d561eedc561ef51377ef",
-                "reference": "7ab768908495ed23c920d561eedc561ef51377ef",
+                "url": "https://api.github.com/repos/acdh-oeaw/arche-lib-disserv/zipball/6a564c43676badaf212f3fcad010795ebdac3aa1",
+                "reference": "6a564c43676badaf212f3fcad010795ebdac3aa1",
                 "shasum": ""
             },
             "require": {
-                "acdh-oeaw/arche-lib": ">=2 <6",
-                "acdh-oeaw/easyrdf": "*",
-                "php": ">=8",
-                "zozlak/rdf-constants": "*"
+                "acdh-oeaw/arche-lib": "^7",
+                "php": "^8.1",
+                "zozlak/rdf-constants": "^1"
             },
             "require-dev": {
                 "phpstan/phpstan": "*",
-                "phpunit/phpunit": "^9",
+                "phpunit/phpunit": "^10",
                 "zozlak/yaml-merge": "^1.0"
             },
             "type": "library",
@@ -145,32 +147,32 @@
             "homepage": "https://github.com/acdh-oeaw/arche-lib-disserv",
             "support": {
                 "issues": "https://github.com/acdh-oeaw/arche-lib-disserv/issues",
-                "source": "https://github.com/acdh-oeaw/arche-lib-disserv/tree/3.0.3"
+                "source": "https://github.com/acdh-oeaw/arche-lib-disserv/tree/4.1.0"
             },
-            "time": "2022-07-28T05:59:27+00:00"
+            "time": "2025-05-16T18:40:42+00:00"
         },
         {
             "name": "acdh-oeaw/arche-lib-schema",
-            "version": "6.3.0",
+            "version": "7.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/acdh-oeaw/arche-lib-schema.git",
-                "reference": "806546377a1373514e7f6eb0bb95b42246ef71a9"
+                "reference": "727396817406d6edd4d3617d56e71d94c2cf0053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/acdh-oeaw/arche-lib-schema/zipball/806546377a1373514e7f6eb0bb95b42246ef71a9",
-                "reference": "806546377a1373514e7f6eb0bb95b42246ef71a9",
+                "url": "https://api.github.com/repos/acdh-oeaw/arche-lib-schema/zipball/727396817406d6edd4d3617d56e71d94c2cf0053",
+                "reference": "727396817406d6edd4d3617d56e71d94c2cf0053",
                 "shasum": ""
             },
             "require": {
-                "acdh-oeaw/easyrdf": "*",
-                "php": ">= 8",
+                "acdh-oeaw/arche-lib": "^7",
+                "php": "^8.1",
                 "zozlak/rdf-constants": "^1"
             },
             "require-dev": {
                 "phpstan/phpstan": "*",
-                "phpunit/phpunit": "^9"
+                "phpunit/phpunit": "^10"
             },
             "type": "library",
             "autoload": {
@@ -192,86 +194,9 @@
             "homepage": "https://github.com/acdh-oeaw/arche-lib-schema",
             "support": {
                 "issues": "https://github.com/acdh-oeaw/arche-lib-schema/issues",
-                "source": "https://github.com/acdh-oeaw/arche-lib-schema/tree/6.3.0"
+                "source": "https://github.com/acdh-oeaw/arche-lib-schema/tree/7.1.2"
             },
-            "time": "2024-03-18T13:34:05+00:00"
-        },
-        {
-            "name": "acdh-oeaw/easyrdf",
-            "version": "0.15.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/acdh-oeaw/easyrdf.git",
-                "reference": "1ac1fd9f52e02b8306973efbc514d1b1d1eb9a3c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/acdh-oeaw/easyrdf/zipball/1ac1fd9f52e02b8306973efbc514d1b1d1eb9a3c",
-                "reference": "1ac1fd9f52e02b8306973efbc514d1b1d1eb9a3c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "ext-pcre": "*",
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "ml/json-ld": "~1.0",
-                "phpunit/phpunit": "~4.1",
-                "sami/sami": "~2.0",
-                "semsol/arc2": "~2.2",
-                "squizlabs/php_codesniffer": "~1.4.3",
-                "zendframework/zend-http": "~2.3"
-            },
-            "suggest": {
-                "ml/json-ld": "~1.0",
-                "semsol/arc2": "~2.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "EasyRdf\\": "lib"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nicholas Humfrey",
-                    "email": "njh@aelius.com",
-                    "homepage": "http://www.aelius.com/njh/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Alexey Zakhlestin",
-                    "email": "indeyets@gmail.com",
-                    "homepage": "http://indeyets.ru/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Mateusz Żółtak",
-                    "email": "mateusz.zoltak@oeaw.ac.at",
-                    "role": "Developer"
-                }
-            ],
-            "description": "ACDH fork of the EasyRdf library",
-            "homepage": "http://www.easyrdf.org/",
-            "keywords": [
-                "Linked Data",
-                "RDF",
-                "Semantic Web",
-                "Turtle",
-                "rdfa",
-                "sparql"
-            ],
-            "support": {
-                "issues": "https://github.com/acdh-oeaw/easyrdf/issues",
-                "source": "https://github.com/acdh-oeaw/easyrdf/tree/0.15.3"
-            },
-            "abandoned": "sweetrdf/easyrdf",
-            "time": "2021-12-30T14:26:41+00:00"
+            "time": "2024-10-02T18:51:56+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -597,6 +522,178 @@
                 }
             ],
             "time": "2025-08-23T21:21:41+00:00"
+        },
+        {
+            "name": "ml/iri",
+            "version": "1.1.4",
+            "target-dir": "ML/IRI",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lanthaler/IRI.git",
+                "reference": "cbd44fa913e00ea624241b38cefaa99da8d71341"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lanthaler/IRI/zipball/cbd44fa913e00ea624241b38cefaa99da8d71341",
+                "reference": "cbd44fa913e00ea624241b38cefaa99da8d71341",
+                "shasum": ""
+            },
+            "require": {
+                "lib-pcre": ">=4.0",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "ML\\IRI": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Markus Lanthaler",
+                    "email": "mail@markus-lanthaler.com",
+                    "homepage": "http://www.markus-lanthaler.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "IRI handling for PHP",
+            "homepage": "http://www.markus-lanthaler.com",
+            "keywords": [
+                "URN",
+                "iri",
+                "uri",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/lanthaler/IRI/issues",
+                "source": "https://github.com/lanthaler/IRI/tree/master"
+            },
+            "time": "2014-01-21T13:43:39+00:00"
+        },
+        {
+            "name": "ml/json-ld",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lanthaler/JsonLD.git",
+                "reference": "537e68e87a6bce23e57c575cd5dcac1f67ce25d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lanthaler/JsonLD/zipball/537e68e87a6bce23e57c575cd5dcac1f67ce25d8",
+                "reference": "537e68e87a6bce23e57c575cd5dcac1f67ce25d8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ml/iri": "^1.1.1",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "json-ld/tests": "1.0",
+                "phpunit/phpunit": "^4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ML\\JsonLD\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Markus Lanthaler",
+                    "email": "mail@markus-lanthaler.com",
+                    "homepage": "http://www.markus-lanthaler.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "JSON-LD Processor for PHP",
+            "homepage": "http://www.markus-lanthaler.com",
+            "keywords": [
+                "JSON-LD",
+                "jsonld"
+            ],
+            "support": {
+                "issues": "https://github.com/lanthaler/JsonLD/issues",
+                "source": "https://github.com/lanthaler/JsonLD/tree/1.2.1"
+            },
+            "time": "2022-09-29T08:45:17+00:00"
+        },
+        {
+            "name": "pietercolpaert/hardf",
+            "version": "0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pietercolpaert/hardf.git",
+                "reference": "8dbfb3104ab70e7d43f36016b8ed35e3666ff18c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pietercolpaert/hardf/zipball/8dbfb3104ab70e7d43f36016b8ed35e3666ff18c",
+                "reference": "8dbfb3104ab70e7d43f36016b8ed35e3666ff18c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "*",
+                "phpstan/phpstan": "^0.12.36",
+                "phpunit/phpunit": "^7 || ^8 || ^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "pietercolpaert\\hardf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pieter Colpaert",
+                    "email": "pieter.colpaert@ugent.be",
+                    "homepage": "https://pietercolpaert.be",
+                    "role": "developer"
+                },
+                {
+                    "name": "Ruben Verborgh",
+                    "email": "ruben.verborgh@ugent.be",
+                    "homepage": "https://ruben.verborgh.org",
+                    "role": "developer"
+                }
+            ],
+            "description": "A fast parser for RDF serializations such as turtle, n-triples, n-quads, trig and N3",
+            "homepage": "https://github.com/pietercolpaert/hardf",
+            "keywords": [
+                "Linked Data",
+                "RDF",
+                "Triples",
+                "Turtle",
+                "n-quads",
+                "n-triples",
+                "n3",
+                "open data",
+                "quads",
+                "rdf1.1",
+                "streaming",
+                "trig"
+            ],
+            "support": {
+                "issues": "https://github.com/pietercolpaert/hardf/issues",
+                "source": "https://github.com/pietercolpaert/hardf"
+            },
+            "time": "2024-02-28T12:25:10+00:00"
         },
         {
             "name": "psr/cache",
@@ -1005,17 +1102,277 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
-            "name": "symfony/cache",
-            "version": "v8.0.0",
+            "name": "sweetrdf/quick-rdf",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/cache.git",
-                "reference": "1005fe1988f719db8e0c6db5b8ce24284336530f"
+                "url": "https://github.com/sweetrdf/quickRdf.git",
+                "reference": "82ae152fb7aa1526ead7b20c58801daa42f52880"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/1005fe1988f719db8e0c6db5b8ce24284336530f",
-                "reference": "1005fe1988f719db8e0c6db5b8ce24284336530f",
+                "url": "https://api.github.com/repos/sweetrdf/quickRdf/zipball/82ae152fb7aa1526ead7b20c58801daa42f52880",
+                "reference": "82ae152fb7aa1526ead7b20c58801daa42f52880",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "sweetrdf/rdf-helpers": "^2",
+                "sweetrdf/rdf-interface": "^2 | ^3",
+                "sweetrdf/term-templates": "^2.0.2",
+                "zozlak/rdf-constants": "^1.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2",
+                "phpunit/phpunit": "*",
+                "sweetrdf/rdf-interface-tests": "3.0.0",
+                "sweetrdf/simple-rdf": "^2"
+            },
+            "suggest": {
+                "sweetrdf/quick-rdf-io": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "quickRdf\\": "src/quickRdf"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Żółtak",
+                    "email": "zozlak@zozlak.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yet another RDF library",
+            "homepage": "https://github.com/sweetrdf/quickRdf",
+            "support": {
+                "issues": "https://github.com/sweetrdf/quickRdf/issues",
+                "source": "https://github.com/sweetrdf/quickRdf/tree/2.0.6"
+            },
+            "time": "2025-10-03T09:18:20+00:00"
+        },
+        {
+            "name": "sweetrdf/quick-rdf-io",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sweetrdf/quickRdfIo.git",
+                "reference": "15d648f13f2f59a09a38ee4f889c39b8a6b7cd14"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sweetrdf/quickRdfIo/zipball/15d648f13f2f59a09a38ee4f889c39b8a6b7cd14",
+                "reference": "15d648f13f2f59a09a38ee4f889c39b8a6b7cd14",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-pcre": "*",
+                "ext-xmlreader": "*",
+                "ml/json-ld": "^1.2",
+                "php": ">=8.0",
+                "pietercolpaert/hardf": ">=0.3.1 <1",
+                "sweetrdf/rdf-helpers": "^2",
+                "sweetrdf/rdf-interface": "^3.2",
+                "zozlak/rdf-constants": "^1.1"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpstan/phpstan": "^1",
+                "phpunit/phpunit": "^10",
+                "sweetrdf/quick-rdf": "^2",
+                "sweetrdf/simple-rdf": "^2",
+                "sweetrdf/term-templates": "^2.0.2"
+            },
+            "suggest": {
+                "sweetrdf/quick-rdf": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "quickRdfIo\\": "src/quickRdfIo"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Żółtak",
+                    "email": "zozlak@zozlak.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Collection of parser and serializers compatible with sweetrdf/rdfInterface",
+            "homepage": "https://github.com/sweetrdf/quickRdfIo",
+            "support": {
+                "issues": "https://github.com/sweetrdf/quickRdfIo/issues",
+                "source": "https://github.com/sweetrdf/quickRdfIo/tree/1.2.1"
+            },
+            "time": "2025-10-03T09:22:01+00:00"
+        },
+        {
+            "name": "sweetrdf/rdf-helpers",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sweetrdf/rdfHelpers.git",
+                "reference": "0c6b599cc8e28997cc4336b1d893c16d89ed2508"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sweetrdf/rdfHelpers/zipball/0c6b599cc8e28997cc4336b1d893c16d89ed2508",
+                "reference": "0c6b599cc8e28997cc4336b1d893c16d89ed2508",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "sweetrdf/rdf-interface": "^2 | ^3",
+                "zozlak/rdf-constants": "^1.1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1",
+                "phpunit/phpunit": "^10"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "rdfHelpers\\": "src/rdfHelpers"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Żółtak",
+                    "email": "zozlak@zozlak.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Set of low level helpers for implementing rdfInterface",
+            "homepage": "https://github.com/sweetrdf/rdfHelpers",
+            "support": {
+                "issues": "https://github.com/sweetrdf/rdfHelpers/issues",
+                "source": "https://github.com/sweetrdf/rdfHelpers/tree/2.1.1"
+            },
+            "time": "2025-04-22T13:42:35+00:00"
+        },
+        {
+            "name": "sweetrdf/rdf-interface",
+            "version": "3.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sweetrdf/rdfInterface.git",
+                "reference": "82b565c724b8ce30ea918bfff2232832c66a912f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sweetrdf/rdfInterface/zipball/82b565c724b8ce30ea918bfff2232832c66a912f",
+                "reference": "82b565c724b8ce30ea918bfff2232832c66a912f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "psr/http-message": "^1.0 || ^2.0",
+                "zozlak/rdf-constants": "*"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "rdfInterface\\": "src/rdfInterface"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Żółtak",
+                    "email": "zozlak@zozlak.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A common RDF interface for PHP RDF libraries.",
+            "homepage": "https://github.com/sweetrdf/rdfInterface",
+            "support": {
+                "issues": "https://github.com/sweetrdf/rdfInterface/issues",
+                "source": "https://github.com/sweetrdf/rdfInterface/tree/3.2.0"
+            },
+            "time": "2025-04-28T12:22:37+00:00"
+        },
+        {
+            "name": "sweetrdf/term-templates",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sweetrdf/termTemplates.git",
+                "reference": "1728495806831e9a60bb65fb6a0e471f24c05ec5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sweetrdf/termTemplates/zipball/1728495806831e9a60bb65fb6a0e471f24c05ec5",
+                "reference": "1728495806831e9a60bb65fb6a0e471f24c05ec5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0",
+                "sweetrdf/rdf-interface": "^2 | ^3",
+                "zozlak/rdf-constants": "^1"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1",
+                "phpunit/phpunit": "^10",
+                "sweetrdf/simple-rdf": "^2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "termTemplates\\": "src/termTemplates"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Żółtak",
+                    "email": "zozlak@zozlak.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A set of Term templates for the rdfInterface",
+            "homepage": "https://github.com/sweetrdf/termTemplates",
+            "support": {
+                "issues": "https://github.com/sweetrdf/termTemplates/issues",
+                "source": "https://github.com/sweetrdf/termTemplates/tree/2.0.5"
+            },
+            "time": "2025-10-03T14:45:36+00:00"
+        },
+        {
+            "name": "symfony/cache",
+            "version": "v8.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/cache.git",
+                "reference": "0e67dc8145810d4e1c0d13c0e1d29ceb930b1c8e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/0e67dc8145810d4e1c0d13c0e1d29ceb930b1c8e",
+                "reference": "0e67dc8145810d4e1c0d13c0e1d29ceb930b1c8e",
                 "shasum": ""
             },
             "require": {
@@ -1082,7 +1439,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v8.0.0"
+                "source": "https://github.com/symfony/cache/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -1102,7 +1459,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-16T10:17:21+00:00"
+            "time": "2025-12-04T18:17:06+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -1182,16 +1539,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "12d43bf5ebe79ab96da294f468c38794e1a2c98b"
+                "reference": "a5a054e613da565d46183a845ae4c0c996a3fbce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/12d43bf5ebe79ab96da294f468c38794e1a2c98b",
-                "reference": "12d43bf5ebe79ab96da294f468c38794e1a2c98b",
+                "url": "https://api.github.com/repos/symfony/config/zipball/a5a054e613da565d46183a845ae4c0c996a3fbce",
+                "reference": "a5a054e613da565d46183a845ae4c0c996a3fbce",
                 "shasum": ""
             },
             "require": {
@@ -1236,7 +1593,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/config/tree/v8.0.0"
+                "source": "https://github.com/symfony/config/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -1256,20 +1613,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-02T08:10:27+00:00"
+            "time": "2025-12-05T14:08:45+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "307d3cf852f5ead3618ac60ecbedbdd512c348b1"
+                "reference": "fcb73f69d655b48fcb894a262f074218df08bd58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/307d3cf852f5ead3618ac60ecbedbdd512c348b1",
-                "reference": "307d3cf852f5ead3618ac60ecbedbdd512c348b1",
+                "url": "https://api.github.com/repos/symfony/console/zipball/fcb73f69d655b48fcb894a262f074218df08bd58",
+                "reference": "fcb73f69d655b48fcb894a262f074218df08bd58",
                 "shasum": ""
             },
             "require": {
@@ -1326,7 +1683,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v8.0.0"
+                "source": "https://github.com/symfony/console/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -1346,20 +1703,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-21T13:19:49+00:00"
+            "time": "2025-12-05T15:25:33+00:00"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v8.0.0",
+            "version": "v8.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "8b61252a5e897809ebbe9c7856aa7738830e6002"
+                "reference": "90f6c3364b8f444f85bdb6939664c80af9e0d576"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/8b61252a5e897809ebbe9c7856aa7738830e6002",
-                "reference": "8b61252a5e897809ebbe9c7856aa7738830e6002",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/90f6c3364b8f444f85bdb6939664c80af9e0d576",
+                "reference": "90f6c3364b8f444f85bdb6939664c80af9e0d576",
                 "shasum": ""
             },
             "require": {
@@ -1407,7 +1764,7 @@
             "description": "Allows you to standardize and centralize the way objects are constructed in your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dependency-injection/tree/v8.0.0"
+                "source": "https://github.com/symfony/dependency-injection/tree/v8.0.2"
             },
             "funding": [
                 {
@@ -1427,7 +1784,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-27T08:09:45+00:00"
+            "time": "2025-12-08T06:57:48+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1814,16 +2171,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "7fc96ae83372620eaba3826874f46e26295768ca"
+                "reference": "d937d400b980523dc9ee946bb69972b5e619058d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/7fc96ae83372620eaba3826874f46e26295768ca",
-                "reference": "7fc96ae83372620eaba3826874f46e26295768ca",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/d937d400b980523dc9ee946bb69972b5e619058d",
+                "reference": "d937d400b980523dc9ee946bb69972b5e619058d",
                 "shasum": ""
             },
             "require": {
@@ -1860,7 +2217,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v8.0.0"
+                "source": "https://github.com/symfony/filesystem/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -1880,7 +2237,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-05T14:36:47+00:00"
+            "time": "2025-12-01T09:13:36+00:00"
         },
         {
             "name": "symfony/finder",
@@ -2025,16 +2382,16 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "01cdaf3f26e981c3d9dc87a13cdf7352a8cf6ef8"
+                "reference": "194b5edd7a00703aaf836b56bbf079cd6c4d4a87"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/01cdaf3f26e981c3d9dc87a13cdf7352a8cf6ef8",
-                "reference": "01cdaf3f26e981c3d9dc87a13cdf7352a8cf6ef8",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/194b5edd7a00703aaf836b56bbf079cd6c4d4a87",
+                "reference": "194b5edd7a00703aaf836b56bbf079cd6c4d4a87",
                 "shasum": ""
             },
             "require": {
@@ -2073,6 +2430,7 @@
                 "doctrine/persistence": "^1.3|^2|^3",
                 "dragonmantank/cron-expression": "^3.1",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
+                "phpstan/phpdoc-parser": "^1.0|^2.0",
                 "seld/jsonlint": "^1.10",
                 "symfony/asset": "^7.4|^8.0",
                 "symfony/asset-mapper": "^7.4|^8.0",
@@ -2106,7 +2464,7 @@
                 "symfony/string": "^7.4|^8.0",
                 "symfony/translation": "^7.4|^8.0",
                 "symfony/twig-bundle": "^7.4|^8.0",
-                "symfony/type-info": "^7.4|^8.0",
+                "symfony/type-info": "^7.4.1|^8.0.1",
                 "symfony/uid": "^7.4|^8.0",
                 "symfony/validator": "^7.4|^8.0",
                 "symfony/web-link": "^7.4|^8.0",
@@ -2140,7 +2498,7 @@
             "description": "Provides a tight integration between Symfony components and the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/framework-bundle/tree/v8.0.0"
+                "source": "https://github.com/symfony/framework-bundle/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -2160,20 +2518,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-21T13:19:49+00:00"
+            "time": "2025-12-06T16:55:34+00:00"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "19f925ff62437970e56fcdf793aa93607622d8be"
+                "reference": "3690740e2e8b19d877f20d4f10b7a489cddf0fe2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/19f925ff62437970e56fcdf793aa93607622d8be",
-                "reference": "19f925ff62437970e56fcdf793aa93607622d8be",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/3690740e2e8b19d877f20d4f10b7a489cddf0fe2",
+                "reference": "3690740e2e8b19d877f20d4f10b7a489cddf0fe2",
                 "shasum": ""
             },
             "require": {
@@ -2220,7 +2578,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v8.0.0"
+                "source": "https://github.com/symfony/http-foundation/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -2240,20 +2598,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-13T08:54:25+00:00"
+            "time": "2025-12-07T11:23:24+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v8.0.0",
+            "version": "v8.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "33a41d7f17dfb65519670e7f9c2813896ae2a2aa"
+                "reference": "bcef77a3c8ae8934ce7067172e2a1a6491a62a7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/33a41d7f17dfb65519670e7f9c2813896ae2a2aa",
-                "reference": "33a41d7f17dfb65519670e7f9c2813896ae2a2aa",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/bcef77a3c8ae8934ce7067172e2a1a6491a62a7d",
+                "reference": "bcef77a3c8ae8934ce7067172e2a1a6491a62a7d",
                 "shasum": ""
             },
             "require": {
@@ -2324,7 +2682,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v8.0.0"
+                "source": "https://github.com/symfony/http-kernel/tree/v8.0.2"
             },
             "funding": [
                 {
@@ -2344,7 +2702,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-27T08:33:14+00:00"
+            "time": "2025-12-08T07:59:34+00:00"
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
@@ -2680,16 +3038,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "8da1cf2796c9cef09b170208ddb9bc00d997502e"
+                "reference": "bc8fa314a61fb7c4190e964b18a5bd000d3b45ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/8da1cf2796c9cef09b170208ddb9bc00d997502e",
-                "reference": "8da1cf2796c9cef09b170208ddb9bc00d997502e",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/bc8fa314a61fb7c4190e964b18a5bd000d3b45ce",
+                "reference": "bc8fa314a61fb7c4190e964b18a5bd000d3b45ce",
                 "shasum": ""
             },
             "require": {
@@ -2736,7 +3094,7 @@
                 "url"
             ],
             "support": {
-                "source": "https://github.com/symfony/routing/tree/v8.0.0"
+                "source": "https://github.com/symfony/routing/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -2756,20 +3114,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-27T08:09:45+00:00"
+            "time": "2025-12-01T09:13:36+00:00"
         },
         {
             "name": "symfony/runtime",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/runtime.git",
-                "reference": "5f3b411263a4f47ca9e6d80d304a21b6d47ea325"
+                "reference": "73b34037b23db051048ba2873031ddb89be9f19d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/runtime/zipball/5f3b411263a4f47ca9e6d80d304a21b6d47ea325",
-                "reference": "5f3b411263a4f47ca9e6d80d304a21b6d47ea325",
+                "url": "https://api.github.com/repos/symfony/runtime/zipball/73b34037b23db051048ba2873031ddb89be9f19d",
+                "reference": "73b34037b23db051048ba2873031ddb89be9f19d",
                 "shasum": ""
             },
             "require": {
@@ -2819,7 +3177,7 @@
                 "runtime"
             ],
             "support": {
-                "source": "https://github.com/symfony/runtime/tree/v8.0.0"
+                "source": "https://github.com/symfony/runtime/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -2839,7 +3197,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-05T14:36:47+00:00"
+            "time": "2025-12-05T14:08:45+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -2930,16 +3288,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "f929eccf09531078c243df72398560e32fa4cf4f"
+                "reference": "ba65a969ac918ce0cc3edfac6cdde847eba231dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/f929eccf09531078c243df72398560e32fa4cf4f",
-                "reference": "f929eccf09531078c243df72398560e32fa4cf4f",
+                "url": "https://api.github.com/repos/symfony/string/zipball/ba65a969ac918ce0cc3edfac6cdde847eba231dc",
+                "reference": "ba65a969ac918ce0cc3edfac6cdde847eba231dc",
                 "shasum": ""
             },
             "require": {
@@ -2996,7 +3354,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v8.0.0"
+                "source": "https://github.com/symfony/string/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -3016,7 +3374,182 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-11T14:37:55+00:00"
+            "time": "2025-12-01T09:13:36+00:00"
+        },
+        {
+            "name": "symfony/translation",
+            "version": "v8.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/translation.git",
+                "reference": "770e3b8b0ba8360958abedcabacd4203467333ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/770e3b8b0ba8360958abedcabacd4203467333ca",
+                "reference": "770e3b8b0ba8360958abedcabacd4203467333ca",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4",
+                "symfony/polyfill-mbstring": "^1.0",
+                "symfony/translation-contracts": "^3.6.1"
+            },
+            "conflict": {
+                "nikic/php-parser": "<5.0",
+                "symfony/http-client-contracts": "<2.5",
+                "symfony/service-contracts": "<2.5"
+            },
+            "provide": {
+                "symfony/translation-implementation": "2.3|3.0"
+            },
+            "require-dev": {
+                "nikic/php-parser": "^5.0",
+                "psr/log": "^1|^2|^3",
+                "symfony/config": "^7.4|^8.0",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/dependency-injection": "^7.4|^8.0",
+                "symfony/finder": "^7.4|^8.0",
+                "symfony/http-client-contracts": "^2.5|^3.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/intl": "^7.4|^8.0",
+                "symfony/polyfill-intl-icu": "^1.21",
+                "symfony/routing": "^7.4|^8.0",
+                "symfony/service-contracts": "^2.5|^3",
+                "symfony/yaml": "^7.4|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Resources/functions.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Component\\Translation\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides tools to internationalize your application",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/translation/tree/v8.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-12-01T09:13:36+00:00"
+        },
+        {
+            "name": "symfony/translation-contracts",
+            "version": "v3.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/translation-contracts.git",
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/65a8bc82080447fae78373aa10f8d13b38338977",
+                "reference": "65a8bc82080447fae78373aa10f8d13b38338977",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/contracts",
+                    "name": "symfony/contracts"
+                },
+                "branch-alias": {
+                    "dev-main": "3.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Contracts\\Translation\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Test/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Generic abstractions related to translation",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.6.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-07-15T13:41:35+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -3187,16 +3720,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v8.0.0",
+            "version": "v8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "74521d9e932f623616b5d860199124c0fd5c8cca"
+                "reference": "7a1a90ba1df6e821a6b53c4cabdc32a56cabfb14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/74521d9e932f623616b5d860199124c0fd5c8cca",
-                "reference": "74521d9e932f623616b5d860199124c0fd5c8cca",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7a1a90ba1df6e821a6b53c4cabdc32a56cabfb14",
+                "reference": "7a1a90ba1df6e821a6b53c4cabdc32a56cabfb14",
                 "shasum": ""
             },
             "require": {
@@ -3238,7 +3771,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v8.0.0"
+                "source": "https://github.com/symfony/yaml/tree/v8.0.1"
             },
             "funding": [
                 {
@@ -3258,7 +3791,52 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-16T10:17:21+00:00"
+            "time": "2025-12-04T18:17:06+00:00"
+        },
+        {
+            "name": "zozlak/guzzle-proxy-client",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zozlak/guzzleProxyClient.git",
+                "reference": "42f08a0ac0759743bf107e16ea9a5223cf799e95"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zozlak/guzzleProxyClient/zipball/42f08a0ac0759743bf107e16ea9a5223cf799e95",
+                "reference": "42f08a0ac0759743bf107e16ea9a5223cf799e95",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": ">=6"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "zozlak\\": "src/zozlak"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mateusz Żółtak",
+                    "email": "zozlak@zozlak.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A wrapper around GuzzleHttp Client honoring proxy settings in http_proxy, https_proxy and no_proxy environment variables",
+            "homepage": "https://github.com/zozlak/guzzleProxyClient",
+            "support": {
+                "issues": "https://github.com/zozlak/guzzleProxyClient/issues",
+                "source": "https://github.com/zozlak/guzzleProxyClient/tree/1.1.0"
+            },
+            "time": "2025-06-06T16:19:05+00:00"
         },
         {
             "name": "zozlak/query-part",

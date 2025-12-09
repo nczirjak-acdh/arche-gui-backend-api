@@ -10,17 +10,34 @@
 controllers:
     resource: routing.controllers
 
-api_test:
-  path: /api/test
-  controller: App\Controller\TestController::index
-  methods: [GET]
-  
-
+## homepage slider
 arche_api_topcollections:
   path: '/api/topcollections/{count}/{lang}'
-  controller: 'App\Controller\ApiController::topCollections'
+  controller: 'App\Controller\MetadataController::getTopCollections'
   requirements:
     count: '^[^\?]*$'
+    lang: '^[^\?]*$'
+    _permission: 'access content'
+    _access: 'TRUE'
+    
+## metadata view main api    
+arche_core_api_expert:    
+  path: '/api/expert/{id}/{lang}'
+  defaults:
+    _controller: 'App\Controller\MetadataController::getExpertData'
+  requirements:
+    id: '^[^\?]*$'
+    lang: '^[^\?]*$'
+    _permission: 'access content'
+    _access: 'TRUE'     
+
+## breadrcumb, metadata view
+arche_core_api_breadcrumb:    
+  path: '/api/breadcrumb/{id}/{lang}'
+  defaults:
+    _controller: 'App\Controller\MetadataController::getBreadcrumb'
+  requirements:
+    id: '^[^\?]*$'
     lang: '^[^\?]*$'
     _permission: 'access content'
     _access: 'TRUE'  
