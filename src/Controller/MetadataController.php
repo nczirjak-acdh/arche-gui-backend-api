@@ -22,9 +22,7 @@ class MetadataController extends \App\Controller\ArcheBaseController {
     
     public function __construct(ArcheContext $arche, RequestStack $rs, private MetadataService $metadataService)
     {
-        parent::__construct($arche, $rs);
-        //$this->helper = new \Drupal\arche_core_gui_api\Helper\ArcheCoreHelper();
-        //$this->acceptedFormatsHelper = new \Drupal\arche_core_gui_api\Helper\AcceptedFormatsHelper();
+        parent::__construct($arche, $rs);       
     }
     
  

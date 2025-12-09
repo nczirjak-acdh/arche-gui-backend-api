@@ -11,6 +11,7 @@
         "acdh-oeaw/arche-lib": "^7.4",
         "acdh-oeaw/arche-lib-disserv": "^4.1",
         "acdh-oeaw/arche-lib-schema": "^7.1",
+        "nelmio/cors-bundle": "^2.6",
         "symfony/console": "8.0.*",
         "symfony/dotenv": "8.0.*",
         "symfony/flex": "^2",

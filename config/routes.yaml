@@ -41,3 +41,14 @@ arche_core_api_breadcrumb:
     lang: '^[^\?]*$'
     _permission: 'access content'
     _access: 'TRUE'  
+
+arche_core_api_child_tree:    
+    path: '/api/child-tree/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\ChildController::getChildTreeData'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'
+            
