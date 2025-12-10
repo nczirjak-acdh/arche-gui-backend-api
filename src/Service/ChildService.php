@@ -5,6 +5,9 @@ namespace App\Service;
 use zozlak\RdfConstants as RC;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizer;
+use acdhOeaw\arche\lib\SearchConfig;
+use App\Helper\ArcheCoreHelper;
+use acdhOeaw\arche\lib\SearchTerm;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ChildService
@@ -29,18 +32,18 @@ class ChildService
      * @param string $lang
      * @return Response
      */
-    public function getChildTreeData(string $id, string $lang, array $searchProps): Response {
+    public function getChildTreeData(string $id, string $lang, array $searchProps): \Symfony\Component\HttpFoundation\JsonResponse {
          $id = $this->sanitizeArcheID($id);
 
         if (empty($id)) {       
             $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
-            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+            return new \Symfony\Component\HttpFoundation\JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
         }
 
         $result = [];
         $schema = $this->repoDb->getSchema();
         $property = [(string) $schema->parent, 'http://www.w3.org/2004/02/skos/core#prefLabel'];
-
+        
         $resContext = [
             (string) $schema->label => 'title',
             //   (string) \zozlak\RdfConstants::RDF_TYPE => 'rdftype',
@@ -66,6 +69,7 @@ class ChildService
         $searchPhrase = '';
         $result = $this->getChildren($id, $resContext, $orderby, $lang);
 
+        
         //if we have metadata error #23804 , we have to prevent jstree destroy
         if(isset($result['error'])) {
             $result = [];
@@ -88,14 +92,14 @@ class ChildService
             return $response;
         }
 
-        $helper = new \Drupal\arche_core_gui_api\Helper\ArcheCoreHelper();
+        $helper = new \App\Helper\ArcheCoreHelper();
         $result = $helper->extractChildTreeView((array) $result, $this->repoDb->getBaseUrl(), $lang);
 
         if (count((array) $result) == 0) {
-            return new Response(json_encode([]), 200, ['Content-Type' => 'application/json']);
+            return new \Symfony\Component\HttpFoundation\JsonResponse(json_encode([]), 200, ['Content-Type' => 'application/json']);
         }
 
-        $response = new Response();
+        $response = new \Symfony\Component\HttpFoundation\JsonResponse();
         $response->setContent(json_encode((array) $result, \JSON_PARTIAL_OUTPUT_ON_ERROR, 1024));
         $response->headers->set('Content-Type', 'application/json');
 
@@ -119,17 +123,40 @@ class ChildService
         $context[\zozlak\RdfConstants::RDF_TYPE] = 'class';
         $context[(string) $schema->nextItem] = 'nextItem';
         $context[(string) $schema->searchMatch] = 'match';
-        $searchCfg = new SearchConfig();
+        $searchCfg = new \acdhOeaw\arche\lib\SearchConfig();
         $searchCfg->metadataMode = '0_0_1_0';
         $searchCfg->resourceProperties = array_keys($context);
         $searchCfg->relativesProperties = [
             (string) $schema->label,
             (string) $schema->nextItem,
         ];
-        $searchTerm = new SearchTerm($schema->parent, $this->repoDb->getBaseUrl() . $resId, type: SearchTerm::TYPE_RELATION);
+        
+        //echo "<pre>";
+        //var_dump($resContext);
+        //var_dump($context);
+        //var_dump($searchCfg);
+        //echo "</pre>";
+
+        //die();
+        
+        $searchTerm = new \acdhOeaw\arche\lib\SearchTerm($schema->parent, $this->repoDb->getBaseUrl() . $resId, type: SearchTerm::TYPE_RELATION);
         $pdoStmt = $this->repoDb->getPdoStatementBySearchTerms([$searchTerm], $searchCfg);
+        
+        //echo "<pre>";
+       // var_dump($searchTerm);
+       // var_dump($schema->parent);
+       // var_dump($this->repoDb->getBaseUrl() . $resId);
+        //var_dump(SearchTerm::TYPE_RELATION);
+        //echo "</pre>";
+
+        //die();
         $resources = [];
         while ($triple = $pdoStmt->fetchObject()) {
+            //echo "<pre>";
+            //var_dump($triple);
+            //echo "</pre>";
+
+            //die();
             $triple->value ??= '';
             $id = (string) $triple->id;
             $shortProperty = $context[$triple->property] ?? false;
