@@ -11,7 +11,6 @@ use acdhOeaw\arche\lib\SearchConfig;
 use acdhOeaw\arche\lib\SearchTerm;
 use zozlak\RdfConstants as RC;
 use Symfony\Component\HttpFoundation\RequestStack;
-
 use Symfony\Component\Routing\Attribute\Route;
 
 class MetadataController extends \App\Controller\ArcheBaseController {
@@ -61,6 +60,11 @@ class MetadataController extends \App\Controller\ArcheBaseController {
         return $data;
         
     }
+    
+    
+    
+    
+    
     
     
     /*** OLD CODES ***/

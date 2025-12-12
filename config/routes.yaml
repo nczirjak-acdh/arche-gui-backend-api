@@ -51,4 +51,23 @@ arche_core_api_child_tree:
         lang: '^[^\?]*$'
         _permission: 'access content'
         _access: 'TRUE'
-            
+
+arche_core_api_versions_list:    
+    path: '/api/versions-list/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\VersionsController::getVersionsList'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'            
+        
+arche_core_api_rpr_table:    
+    path: '/api/rprDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getRPRDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'         

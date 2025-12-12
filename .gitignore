@@ -1,5 +1,9 @@
 
 ###> symfony/framework-bundle ###
+/.env
+/.env.dev
+.env
+.env.dev
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -10,3 +14,7 @@
 ###< symfony/framework-bundle ###
 /nbproject
 /bin
+/symfony.lock
+/composer.lock
+
+
