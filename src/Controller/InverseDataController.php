@@ -44,7 +44,7 @@ class InverseDataController extends \App\Controller\ArcheBaseController {
     }
 
     /**
-     * Home Page slider data
+     * Get Related Collections and Resources
      * @param int $count
      * @param string $lang
      * @return JsonResponse
@@ -55,6 +55,53 @@ class InverseDataController extends \App\Controller\ArcheBaseController {
             $searchProps = $this->setProps($request);
         }
         $data = $this->inverseDataService->getRPRDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    /**
+     * Get Publications DT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getPublicationsDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getPublicationsDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    
+    /**
+     * Get CollectionConceptDT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getCollectionConceptDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getCollectionConceptDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    
+    /**
+     * Get CollectionConceptDT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getProjectAssociatedDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getProjectAssociatedDT($id, $lang ?: $this->siteLang, $searchProps);
         return $data;
     }
 }

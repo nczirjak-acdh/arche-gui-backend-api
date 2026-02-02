@@ -31,7 +31,7 @@ arche_core_api_expert:
     _permission: 'access content'
     _access: 'TRUE'     
 
-## breadrcumb, metadata view
+## breadrcumb
 arche_core_api_breadcrumb:    
   path: '/api/breadcrumb/{id}/{lang}'
   defaults:
@@ -41,7 +41,8 @@ arche_core_api_breadcrumb:
     lang: '^[^\?]*$'
     _permission: 'access content'
     _access: 'TRUE'  
-
+    
+## metadata view child api
 arche_core_api_child_tree:    
     path: '/api/child-tree/{id}/{lang}'
     defaults:
@@ -52,6 +53,8 @@ arche_core_api_child_tree:
         _permission: 'access content'
         _access: 'TRUE'
 
+
+## metadata view facets
 arche_core_api_versions_list:    
     path: '/api/versions-list/{id}/{lang}'
     defaults:
@@ -61,7 +64,10 @@ arche_core_api_versions_list:
         lang: '^[^\?]*$'
         _permission: 'access content'
         _access: 'TRUE'            
-        
+
+
+
+## metadata datatables
 arche_core_api_rpr_table:    
     path: '/api/rprDT/{id}/{lang}'
     defaults:
@@ -71,3 +77,37 @@ arche_core_api_rpr_table:
         lang: '^[^\?]*$'
         _permission: 'access content'
         _access: 'TRUE'         
+      
+arche_core_api_publications_table:    
+    path: '/api/publicationsDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getPublicationsDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'    
+        
+arche_core_api_collectionConcept_table:    
+    path: '/api/collectionConceptDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getCollectionConceptDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'            
+        
+arche_core_api_project_accociated_table:    
+    path: '/api/projectAssociatedDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getProjectAssociatedDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'            
+        
+        
+        
+        

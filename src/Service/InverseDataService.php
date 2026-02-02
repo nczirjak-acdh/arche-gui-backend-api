@@ -28,6 +28,173 @@ class InverseDataService
         return preg_replace('/\D/', '', $id);
     }
     
+    public function getProjectAssociatedDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $property = [
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasRelatedProject'
+        ];
+
+        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
+        $orderKey = $searchProps['orderby'];
+        if (array_key_exists($searchProps['orderby'], $columns)) {
+            $searchProps['orderby'] = $columns[$searchProps['orderby']];
+            $searchProps['orderbyColumn'] = $orderKey;
+        } else {
+            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
+            $searchProps['orderbyColumn'] = 1;
+        }
+
+        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
+    }
+    
+    
+    /**
+     * ContentScheme data DT
+     * @param string $id
+     * @param array $searchProps
+     * @param string $lang
+     * @return Response
+     */
+    public function getCollectionConceptDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $id = $this->sanitizeArcheID($id);
+
+        if (empty($id)) {
+            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+        $result = [];
+        $scfg = new \acdhOeaw\arche\lib\SearchConfig();
+        $scfg->metadataMode = 'resource';
+        $scfg->offset = $searchProps['offset'];
+        $scfg->limit = $searchProps['limit'];
+        $orderby = "";
+        if ($searchProps['order'] === 'desc') {
+            $orderby = '^';
+        }
+        $scfg->orderBy = [$orderby . $this->schema->label];
+        $scfg->orderByLang = $lang;
+
+        $property = [
+            (string) 'http://www.w3.org/2004/02/skos/core#topConceptOf'
+        ];
+
+        $resContext = [
+            (string) $this->schema->label => 'title',
+            (string) \zozlak\RdfConstants::RDF_TYPE => 'rdftype',
+            (string) $this->schema->id => 'identifier'
+        ];
+
+        $relContext = [
+            (string) $this->schema->label => 'title',
+        ];
+
+        $searchPhrase = (isset($searchProps['search'])) ? $searchProps['search'] : "";
+
+        list($result, $totalCount) = $this->getInverse($id, $resContext, $relContext, $scfg, $property, $searchPhrase);
+        $helper = new \App\Helper\InverseTableHelper();
+        $result = $helper->extractinverseTableView($result, $lang);
+
+        if (count((array) $result) == 0) {
+            $message = $this->translator->trans('arche_error.no_resource', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+        $response = new JsonResponse();
+        $response->setContent(
+                json_encode(
+                        array(
+                            "aaData" => (array) $result,
+                            "iTotalRecords" => (string) $totalCount,
+                            "iTotalDisplayRecords" => (string) $totalCount,
+                            "draw" => intval($searchProps['draw']),
+                            "cols" => array_keys((array) $result[0]),
+                            "order" => 'asc',
+                            "orderby" => 1
+                        )
+                )
+        );
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+    
+    
+    /**
+     * The publications data table datasource
+     * @param string $id
+     * @param array $searchProps
+     * @param string $lang
+     * @return Response
+     */
+    public function getPublicationsDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $id = $this->sanitizeArcheID($id);
+
+        if (empty($id)) {
+            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+
+        $result = [];
+        $scfg = new \acdhOeaw\arche\lib\SearchConfig();
+        $scfg->metadataMode = 'resource';
+        $scfg->offset = $searchProps['offset'];
+        $scfg->limit = $searchProps['limit'];
+        $orderby = "";
+        if ($searchProps['order'] === 'desc') {
+            $orderby = '^';
+        }
+        $scfg->orderBy = [$orderby . $this->schema->label];
+        $scfg->orderByLang = $lang;
+
+        $property = [
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isDerivedPublicationOf',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasDerivedPublication',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isSourceOf',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasSource',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#documents',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isDocumentedBy'
+        ];
+
+        $resContext = [
+            (string) $this->schema->label => 'title',
+            (string) \zozlak\RdfConstants::RDF_TYPE => 'rdftype',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasCustomCitation' => 'customCitation',
+            (string) $this->schema->id => 'identifier',
+            (string) $this->schema->accessRestriction => 'accessRestriction'
+        ];
+
+        $relContext = [
+            (string) $this->schema->label => 'title',
+        ];
+
+        $searchPhrase = (isset($searchProps['search'])) ? $searchProps['search'] : "";
+
+        list($result, $totalCount) = $this->getInverse($id, $resContext, $relContext, $scfg, $property, $searchPhrase);
+        $helper = new \App\Helper\InverseTableHelper();
+        $result = $helper->extractinverseTableView($result, $lang);
+
+        if (count((array) $result) == 0) {
+            $message = $this->translator->trans('arche_error.no_resource', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+        $response = new JsonResponse();
+        $response->setContent(
+                json_encode(
+                        array(
+                            "aaData" => (array) $result,
+                            "iTotalRecords" => (string) $totalCount,
+                            "iTotalDisplayRecords" => (string) $totalCount,
+                            "draw" => intval($searchProps['draw']),
+                            "cols" => array_keys((array) $result[0]),
+                            "order" => 'asc',
+                            "orderby" => 1
+                        )
+                )
+        );
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
     
     /**
      * Get Related Collections and Resources
@@ -298,152 +465,7 @@ class InverseDataService
 
     
 
-    /**
-     * The publications data table datasource
-     * @param string $id
-     * @param array $searchProps
-     * @param string $lang
-     * @return Response
-     */
-    public function getPublicationsDT(string $id, array $searchProps, string $lang): Response {
-        $id = $this->sanitizeArcheID($id);
 
-        if (empty($id)) {
-            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
-            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
-        }
-
-        $result = [];
-        $scfg = new \acdhOeaw\arche\lib\SearchConfig();
-        $scfg->metadataMode = 'resource';
-        $scfg->offset = $searchProps['offset'];
-        $scfg->limit = $searchProps['limit'];
-        $orderby = "";
-        if ($searchProps['order'] === 'desc') {
-            $orderby = '^';
-        }
-        $scfg->orderBy = [$orderby . $this->schema->label];
-        $scfg->orderByLang = $lang;
-
-        $property = [
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isDerivedPublicationOf',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasDerivedPublication',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isSourceOf',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasSource',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#documents',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isDocumentedBy'
-        ];
-
-        $resContext = [
-            (string) $this->schema->label => 'title',
-            (string) \zozlak\RdfConstants::RDF_TYPE => 'rdftype',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasCustomCitation' => 'customCitation',
-            (string) $this->schema->id => 'identifier',
-            (string) $this->schema->accessRestriction => 'accessRestriction'
-        ];
-
-        $relContext = [
-            (string) $this->schema->label => 'title',
-        ];
-
-        $searchPhrase = (isset($searchProps['search'])) ? $searchProps['search'] : "";
-
-        list($result, $totalCount) = $this->getInverse($id, $resContext, $relContext, $scfg, $property, $searchPhrase);
-        $helper = new \App\Helper\InverseTableHelper();
-        $result = $helper->extractinverseTableView($result, $lang);
-
-        if (count((array) $result) == 0) {
-            $message = $this->translator->trans('arche_error.no_resource', [], 'messages', $lang);
-            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
-        }
-
-        $response = new JsonResponse();
-        $response->setContent(
-                json_encode(
-                        array(
-                            "aaData" => (array) $result,
-                            "iTotalRecords" => (string) $totalCount,
-                            "iTotalDisplayRecords" => (string) $totalCount,
-                            "draw" => intval($searchProps['draw']),
-                            "cols" => array_keys((array) $result[0]),
-                            "order" => 'asc',
-                            "orderby" => 1
-                        )
-                )
-        );
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
-    }
-
-    /**
-     * ContentScheme data DT
-     * @param string $id
-     * @param array $searchProps
-     * @param string $lang
-     * @return Response
-     */
-    public function getCollectionConceptDT(string $id, array $searchProps, string $lang): JsonResponse {
-        $id = $this->sanitizeArcheID($id);
-
-        if (empty($id)) {
-            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
-            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
-        }
-
-        $result = [];
-        $scfg = new \acdhOeaw\arche\lib\SearchConfig();
-        $scfg->metadataMode = 'resource';
-        $scfg->offset = $searchProps['offset'];
-        $scfg->limit = $searchProps['limit'];
-        $orderby = "";
-        if ($searchProps['order'] === 'desc') {
-            $orderby = '^';
-        }
-        $scfg->orderBy = [$orderby . $this->schema->label];
-        $scfg->orderByLang = $lang;
-
-        $property = [
-            (string) 'http://www.w3.org/2004/02/skos/core#topConceptOf'
-        ];
-
-        $resContext = [
-            (string) $this->schema->label => 'title',
-            (string) \zozlak\RdfConstants::RDF_TYPE => 'rdftype',
-            (string) $this->schema->id => 'identifier'
-        ];
-
-        $relContext = [
-            (string) $this->schema->label => 'title',
-        ];
-
-        $searchPhrase = (isset($searchProps['search'])) ? $searchProps['search'] : "";
-
-        list($result, $totalCount) = $this->getInverse($id, $resContext, $relContext, $scfg, $property, $searchPhrase);
-        $helper = new \App\Helper\InverseTableHelper();
-        $result = $helper->extractinverseTableView($result, $lang);
-
-        if (count((array) $result) == 0) {
-            $message = $this->translator->trans('arche_error.no_resource', [], 'messages', $lang);
-            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
-        }
-
-        $response = new JsonResponse();
-        $response->setContent(
-                json_encode(
-                        array(
-                            "aaData" => (array) $result,
-                            "iTotalRecords" => (string) $totalCount,
-                            "iTotalDisplayRecords" => (string) $totalCount,
-                            "draw" => intval($searchProps['draw']),
-                            "cols" => array_keys((array) $result[0]),
-                            "order" => 'asc',
-                            "orderby" => 1
-                        )
-                )
-        );
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
-    }
 
     /**
      * Create the general inverse  property table data
@@ -541,23 +563,7 @@ class InverseDataService
         return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
     }
 
-    public function getAssociatedProjectsDT(string $id, array $searchProps, string $lang): JsonResponse {
-        $property = [
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasRelatedProject'
-        ];
-
-        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
-        $orderKey = $searchProps['orderby'];
-        if (array_key_exists($searchProps['orderby'], $columns)) {
-            $searchProps['orderby'] = $columns[$searchProps['orderby']];
-            $searchProps['orderbyColumn'] = $orderKey;
-        } else {
-            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
-            $searchProps['orderbyColumn'] = 1;
-        }
-
-        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
-    }
+    
 
     /**
      * Persons contributed to data
