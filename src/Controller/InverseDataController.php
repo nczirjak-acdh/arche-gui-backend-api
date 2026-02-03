@@ -91,7 +91,7 @@ class InverseDataController extends \App\Controller\ArcheBaseController {
     
     
     /**
-     * Get CollectionConceptDT
+     * Get Project Associated DT
      * @param int $count
      * @param string $lang
      * @return JsonResponse
@@ -104,4 +104,84 @@ class InverseDataController extends \App\Controller\ArcheBaseController {
         $data = $this->inverseDataService->getProjectAssociatedDT($id, $lang ?: $this->siteLang, $searchProps);
         return $data;
     }
+    
+    /**
+     * Get Spatial DT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getSpatialDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getSpatialDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    /**
+     * Get Contributed DT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getContributedDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getContributedDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    /**
+     * Get ispartof DT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getIsPartOfDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getIsPartOfDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    
+    /**
+     * Get involved DT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getInvolvedDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getInvolvedDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    /**
+     * Get has members DT
+     * @param int $count
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getHasMembersDT(string $id, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+        $data = $this->inverseDataService->getHasMembersDT($id, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+    
+    
+    
+    
 }

@@ -28,6 +28,172 @@ class InverseDataService
         return preg_replace('/\D/', '', $id);
     }
     
+    /**
+     * involved in data
+     * @param string $id
+     * @param array $searchProps
+     * @param string $lang
+     * @return Response
+     */
+    public function getHasMembersDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $id = $this->sanitizeArcheID($id);
+
+        if (empty($id)) {
+            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+        
+        $property = [
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isMemberOf'
+        ];
+
+        $columns = [1 => (string) $this->schema->label];
+        $orderKey = $searchProps['orderby'];
+        if (array_key_exists($searchProps['orderby'], $columns)) {
+            $searchProps['orderby'] = $columns[$searchProps['orderby']];
+            $searchProps['orderbyColumn'] = $orderKey;
+        } else {
+            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
+            $searchProps['orderbyColumn'] = 1;
+        }
+        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
+    }
+
+    /**
+     * involved in data
+     * @param string $id
+     * @param array $searchProps
+     * @param string $lang
+     * @return Response
+     */
+    public function getInvolvedDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $id = $this->sanitizeArcheID($id);
+
+        if (empty($id)) {
+            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+        
+        $property = [
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasContributor',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasFunder',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasOwner',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasLicensor',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasRightsHolder',
+        ];
+
+        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
+        $orderKey = $searchProps['orderby'];
+        if (array_key_exists($searchProps['orderby'], $columns)) {
+            $searchProps['orderby'] = $columns[$searchProps['orderby']];
+            $searchProps['orderbyColumn'] = $orderKey;
+        } else {
+            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
+            $searchProps['orderbyColumn'] = 1;
+        }
+        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
+    }
+    
+    /**
+     * ISpart of data
+     * @param string $id
+     * @param string $lang
+     * @param array $searchProps     
+     * @return Response
+     */
+    public function getIsPartOfDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $id = $this->sanitizeArcheID($id);
+
+        if (empty($id)) {
+            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+        $property = [
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isPartOf'
+        ];
+        $columns = [1 => (string) $this->schema->label, 3 => (string) \zozlak\RdfConstants::RDF_TYPE];
+        $orderKey = $searchProps['orderby'];
+        if (array_key_exists($searchProps['orderby'], $columns)) {
+            $searchProps['orderby'] = $columns[$searchProps['orderby']];
+            $searchProps['orderbyColumn'] = $orderKey;
+        } else {
+            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
+            $searchProps['orderbyColumn'] = 1;
+        }
+
+        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
+    }
+    
+    /**
+     * Contributed data
+     * @param string $id
+     * @param array $searchProps
+     * @param string $lang
+     * @return Response
+     */
+    public function getContributedDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $id = $this->sanitizeArcheID($id);
+
+        if (empty($id)) {
+            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+        $property = [
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasContributor',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasCreator',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasAuthor',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasEditor',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasPrincipalInvestigator',
+        ];
+
+        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
+        $orderKey = $searchProps['orderby'];
+        if (array_key_exists($searchProps['orderby'], $columns)) {
+            $searchProps['orderby'] = $columns[$searchProps['orderby']];
+            $searchProps['orderbyColumn'] = $orderKey;
+        } else {
+            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
+            $searchProps['orderbyColumn'] = 1;
+        }
+        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
+    }
+    
+    
+    /**
+     * Place inverse table data
+     * @param string $id
+     * @param array $searchProps
+     * @param string $lang
+     * @return Response
+     */
+    public function getSpatialDT(string $id, string $lang, array $searchProps ): JsonResponse {
+        $id = $this->sanitizeArcheID($id);
+
+        if (empty($id)) {
+            $message = $this->translator->trans('arche_error.provide_id', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+        $property = [
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasSpatialCoverage',
+            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isSpatialCoverage'
+        ];
+
+        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
+        $orderKey = $searchProps['orderby'];
+        if (array_key_exists($searchProps['orderby'], $columns)) {
+            $searchProps['orderby'] = $columns[$searchProps['orderby']];
+            $searchProps['orderbyColumn'] = $orderKey;
+        } else {
+            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
+            $searchProps['orderbyColumn'] = 1;
+        }
+
+        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
+    }
+    
     public function getProjectAssociatedDT(string $id, string $lang, array $searchProps ): JsonResponse {
         $property = [
             (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasRelatedProject'
@@ -299,10 +465,6 @@ class InverseDataService
     
     
     
-    /* OLD CODE */
-    
-    
-    
     
     
     private function getInverse(
@@ -537,124 +699,15 @@ class InverseDataService
         return $response;
     }
 
-    /**
-     * Place inverse table data
-     * @param string $id
-     * @param array $searchProps
-     * @param string $lang
-     * @return Response
-     */
-    public function getSpatialDT(string $id, array $searchProps, string $lang): JsonResponse {
-        $property = [
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasSpatialCoverage',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isSpatialCoverage'
-        ];
-
-        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
-        $orderKey = $searchProps['orderby'];
-        if (array_key_exists($searchProps['orderby'], $columns)) {
-            $searchProps['orderby'] = $columns[$searchProps['orderby']];
-            $searchProps['orderbyColumn'] = $orderKey;
-        } else {
-            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
-            $searchProps['orderbyColumn'] = 1;
-        }
-
-        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
-    }
+    
 
     
 
-    /**
-     * Persons contributed to data
-     * @param string $id
-     * @param array $searchProps
-     * @param string $lang
-     * @return Response
-     */
-    public function contributedDT(string $id, array $searchProps, string $lang): JsonResponse {
-        $property = [
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasContributor',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasCreator',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasAuthor',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasEditor',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasPrincipalInvestigator',
-        ];
+    
 
-        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
-        $orderKey = $searchProps['orderby'];
-        if (array_key_exists($searchProps['orderby'], $columns)) {
-            $searchProps['orderby'] = $columns[$searchProps['orderby']];
-            $searchProps['orderbyColumn'] = $orderKey;
-        } else {
-            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
-            $searchProps['orderbyColumn'] = 1;
-        }
-        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
-    }
+    
 
-    /**
-     * Organisations involved in data
-     * @param string $id
-     * @param array $searchProps
-     * @param string $lang
-     * @return Response
-     */
-    public function involvedDT(string $id, array $searchProps, string $lang): JsonResponse {
-        $property = [
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasContributor',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasFunder',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasOwner',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasLicensor',
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#hasRightsHolder',
-        ];
-
-        $columns = [3 => (string) $this->schema->label, 4 => (string) \zozlak\RdfConstants::RDF_TYPE];
-        $orderKey = $searchProps['orderby'];
-        if (array_key_exists($searchProps['orderby'], $columns)) {
-            $searchProps['orderby'] = $columns[$searchProps['orderby']];
-            $searchProps['orderbyColumn'] = $orderKey;
-        } else {
-            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
-            $searchProps['orderbyColumn'] = 1;
-        }
-        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
-    }
-
-    public function hasMembersDT(string $id, array $searchProps, string $lang): JsonResponse {
-        $property = [
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isMemberOf'
-        ];
-
-        $columns = [1 => (string) $this->schema->label];
-        $orderKey = $searchProps['orderby'];
-        if (array_key_exists($searchProps['orderby'], $columns)) {
-            $searchProps['orderby'] = $columns[$searchProps['orderby']];
-            $searchProps['orderbyColumn'] = $orderKey;
-        } else {
-            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
-            $searchProps['orderbyColumn'] = 1;
-        }
-        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
-    }
-
-    public function isPartOfDT(string $id, array $searchProps, string $lang): JsonResponse {
-
-        $property = [
-            (string) 'https://vocabs.acdh.oeaw.ac.at/schema#isPartOf'
-        ];
-        $columns = [1 => (string) $this->schema->label, 3 => (string) \zozlak\RdfConstants::RDF_TYPE];
-        $orderKey = $searchProps['orderby'];
-        if (array_key_exists($searchProps['orderby'], $columns)) {
-            $searchProps['orderby'] = $columns[$searchProps['orderby']];
-            $searchProps['orderbyColumn'] = $orderKey;
-        } else {
-            $searchProps['orderby'] = (string) \zozlak\RdfConstants::RDF_TYPE;
-            $searchProps['orderbyColumn'] = 1;
-        }
-
-        return $this->getGeneralInverseByProperty($id, $searchProps, $property, $lang);
-    }
+    
     
     
 }

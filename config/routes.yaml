@@ -108,6 +108,64 @@ arche_core_api_project_accociated_table:
         _permission: 'access content'
         _access: 'TRUE'            
         
+arche_core_api_spatial_table:    
+    path: '/api/spatialDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getSpatialDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'   
         
+arche_core_api_contributed_table:    
+    path: '/api/contributedDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getContributedDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'         
         
+arche_core_api_ispartof_table:    
+    path: '/api/isPartOfDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getIsPartOfDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'          
         
+arche_core_api_involved_table:    
+    path: '/api/involvedDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getInvolvedDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'        
+        
+arche_core_api_hasmembers_table:    
+    path: '/api/hasMembersDT/{id}/{lang}'
+    defaults:
+        _controller: '\App\Controller\InverseDataController::getHasMembersDT'
+    requirements:
+        identifier: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'            
+        
+arche_core_smart_autocomplete_table:    
+    path: '/api/smsearch/autocomplete/{str}'
+    defaults:
+        _controller: '\App\Controller\SmartSearchController::smartSearchAutoComplete'
+        _format: 'json'
+    requirements:
+        str: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'        
+        
+                  
