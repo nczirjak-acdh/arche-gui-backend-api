@@ -74,12 +74,6 @@ class SmartSearchService {
 
             $limit = 0;
             
-            echo "<pre>";
-            var_dump($this->baseConfig->asArray()['dbConnStr']);
-            echo "</pre>";
-
-            die();
-            
             if (isset($this->baseConfig->asArray()['dbConnStr']) && !empty($this->baseConfig->asArray()['dbConnStr'])) {
                 $this->pdo = new \PDO($this->baseConfig->asArray()['dbConnStr']);
 
@@ -96,6 +90,6 @@ class SmartSearchService {
                 $response = array_merge($response, $pdoStmnt->fetchAll(\PDO::FETCH_COLUMN));
             }
         }
-        return new Response(json_encode($response));
+        return new JsonResponse(json_encode($response));
     }
 }

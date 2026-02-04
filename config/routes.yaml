@@ -168,4 +168,25 @@ arche_core_smart_autocomplete_table:
         _permission: 'access content'
         _access: 'TRUE'        
         
+arche_core_root_table:    
+    path: '/api/rootTable/{lang}'
+    defaults:
+        _controller: '\App\Controller\OntologyController::rootTable'
+        _format: 'json'
+    requirements:
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'      
+                  
+
+arche_core_ontologyjs_table:    
+    path: '/api/ontologyjs/{lang}'
+    defaults:
+        _controller: '\App\Controller\OntologyController::ontologyJs'
+        _format: 'json'
+    requirements:
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'      
+
                   
