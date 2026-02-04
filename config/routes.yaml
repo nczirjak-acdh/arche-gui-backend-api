@@ -167,7 +167,7 @@ arche_core_smart_autocomplete_table:
         str: '^[^\?]*$'
         _permission: 'access content'
         _access: 'TRUE'        
-        
+## not ready        
 arche_core_root_table:    
     path: '/api/rootTable/{lang}'
     defaults:
@@ -178,7 +178,7 @@ arche_core_root_table:
         _permission: 'access content'
         _access: 'TRUE'      
                   
-
+## not ready
 arche_core_ontologyjs_table:    
     path: '/api/ontologyjs/{lang}'
     defaults:
@@ -189,4 +189,13 @@ arche_core_ontologyjs_table:
         _permission: 'access content'
         _access: 'TRUE'      
 
-                  
+arche_core_api_next_prev_item:    
+    path: '/api/nextPrevItem/{rootId}/{resourceId}/{lang}'
+    defaults:
+        _controller: '\App\Controller\ChildController::getNextPrevItem'
+    requirements:
+        rootId: '^[^\?]*$'
+        resourceId: '^[^\?]*$'
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'                  

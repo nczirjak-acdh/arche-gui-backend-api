@@ -1,7 +1,7 @@
 <?php 
 
-// src/Service/MetadataService.php
 namespace App\Service;
+
 use zozlak\RdfConstants as RC;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizer;

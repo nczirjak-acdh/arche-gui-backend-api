@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;   
+namespace App\Controller;
 
 use App\Service\ArcheContext;
 use App\Service\ChildService;
@@ -24,8 +24,6 @@ class ChildController extends \App\Controller\ArcheBaseController {
 
     private function setProps(Request $request): array {
 
-        
-
         $draw = $request->request->getInt('draw', 0);
         $offset = $request->request->getInt('start', 0);
         $limit = $request->request->getInt('length', 10);
@@ -38,7 +36,6 @@ class ChildController extends \App\Controller\ArcheBaseController {
         $order = $order['dir'] ?? 'asc';
         $orderField = $columns[$orderby]['data'] ?? 'id';
 
-        
         return [
             'offset' => $offset, 'limit' => $limit, 'draw' => $draw, 'search' => $search,
             'orderby' => $orderby, 'order' => $order
@@ -57,9 +54,37 @@ class ChildController extends \App\Controller\ArcheBaseController {
         if ($request) {
             $searchProps = $this->setProps($request);
         }
-        
-       
+
         $data = $this->childService->getChildTreeData($id, $lang ?: $this->siteLang, $searchProps);
         return $data;
     }
+    
+    
+    /**
+     * Create previos/next item
+     * @param string $rootId
+     * @param string $resourceId
+     * @param string $lang
+     * @param Request 
+     * @return Response
+     */
+    public function getNextPrevItem(string $rootId, string $resourceId, string $lang, Request $request): \Symfony\Component\HttpFoundation\JsonResponse {
+        
+        $rootId = filter_var($rootId, \FILTER_VALIDATE_INT);
+        $resourceId = filter_var($resourceId, \FILTER_VALIDATE_INT);
+
+        if (empty($rootId) || empty($resourceId)) {
+            return new JsonResponse(array($this->t("Please provide an id")), 404, ['Content-Type' => 'application/json']);
+        }
+        
+        $searchProps = [];
+        if ($request) {
+            $searchProps = $this->setProps($request);
+        }
+
+        $data = $this->childService->getNextPrevItem($rootId, $resourceId, $lang ?: $this->siteLang, $searchProps);
+        return $data;
+    }
+
+    
 }

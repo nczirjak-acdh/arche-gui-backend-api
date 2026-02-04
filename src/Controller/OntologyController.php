@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ArcheContext;
-use App\Service\IOntologyService;
+use App\Service\OntologyService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use acdhOeaw\arche\lib\RepoDb;

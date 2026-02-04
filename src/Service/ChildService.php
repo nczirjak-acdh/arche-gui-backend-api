@@ -131,26 +131,10 @@ class ChildService
             (string) $schema->nextItem,
         ];
         
-        //echo "<pre>";
-        //var_dump($resContext);
-        //var_dump($context);
-        //var_dump($searchCfg);
-        //echo "</pre>";
-
-        //die();
-        
         $searchTerm = new \acdhOeaw\arche\lib\SearchTerm($schema->parent, $this->repoDb->getBaseUrl() . $resId, type: SearchTerm::TYPE_RELATION);
         $pdoStmt = $this->repoDb->getPdoStatementBySearchTerms([$searchTerm], $searchCfg);
-        
-        //echo "<pre>";
-       // var_dump($searchTerm);
-       // var_dump($schema->parent);
-       // var_dump($this->repoDb->getBaseUrl() . $resId);
-        //var_dump(SearchTerm::TYPE_RELATION);
-        //echo "</pre>";
-
-        //die();
         $resources = [];
+        
         while ($triple = $pdoStmt->fetchObject()) {
             //echo "<pre>";
             //var_dump($triple);
@@ -202,5 +186,54 @@ class ChildService
         }
         return $children;
     }
+    
+    
+    /**
+     * Create previos/next item
+     * @param string $rootId
+     * @param string $resourceId
+     * @param string $lang
+     * @return Response
+     */
+    public function getNextPrevItem(string $rootId, string $resourceId, string $lang, array $searchProps): \Symfony\Component\HttpFoundation\JsonResponse {
+
+        $rootId = filter_var($rootId, \FILTER_VALIDATE_INT);
+        $resourceId = filter_var($resourceId, \FILTER_VALIDATE_INT);
+
+        if (empty($rootId) || empty($resourceId)) {
+            return new JsonResponse(array($this->t("Please provide an id")), 404, ['Content-Type' => 'application/json']);
+        }
+
+        $result = [];
+        $schema = $this->repoDb->getSchema();
+        $property = [(string) $schema->parent, 'http://www.w3.org/2004/02/skos/core#prefLabel'];
+
+        $resContext = [
+            (string) $schema->label => 'title',
+            (string) $schema->id => 'identifier'
+        ];
+
+        $searchCfg = new \acdhOeaw\arche\lib\SearchConfig();
+        $orderby = "asc";
+        $searchCfg->orderBy = [$schema->label];
+        $searchCfg->orderByLang = $lang;
+        $searchPhrase = '';
+        $result = $this->getChildren($rootId, $resContext, $orderby, $lang);
+
+        $helper = new \App\Helper\ArcheCoreHelper();
+        $result = $helper->extractPrevNextItem((array) $result, $resourceId, $lang);
+
+        if (count((array) $result) == 0) {
+            return new Response(json_encode([]), 200, ['Content-Type' => 'application/json']);
+        }
+
+        $response = new JsonResponse();
+        $response->setContent(json_encode((array) $result, \JSON_PARTIAL_OUTPUT_ON_ERROR, 1024));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+    
+    
     
 }
