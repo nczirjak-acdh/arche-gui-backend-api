@@ -1,0 +1,650 @@
+openapi: 3.1.0
+info:
+  title: 'ARCHE GUI Backend API'
+  version: 1.0.0
+  description: 'Auto-generated OpenAPI specification based on registered Symfony routes.'
+servers:
+  -
+    url: /
+paths:
+  '/api/breadcrumb/{id}/{lang}':
+    get:
+      tags:
+        - Metadata
+      operationId: get_arche_core_api_breadcrumb
+      summary: 'Get the actual resource breadcrumb'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/child-tree/{id}/{lang}':
+    get:
+      tags:
+        - Child
+      operationId: get_arche_core_api_child_tree
+      summary: 'Child tree view API'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/collectionConceptDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_collectionconcept_table
+      summary: 'Get CollectionConceptDT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/contributedDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_contributed_table
+      summary: 'Get Contributed DT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/expert/{id}/{lang}':
+    get:
+      tags:
+        - Metadata
+      operationId: get_arche_core_api_expert
+      summary: 'Metadata view expert content'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/hasMembersDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_hasmembers_table
+      summary: 'Get has members DT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/involvedDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_involved_table
+      summary: 'Get involved DT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/isPartOfDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_ispartof_table
+      summary: 'Get ispartof DT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/nextPrevItem/{rootId}/{resourceId}/{lang}':
+    get:
+      tags:
+        - Child
+      operationId: get_arche_core_api_next_prev_item
+      summary: 'Create previos/next item'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: rootId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+        -
+          name: resourceId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/ontologyjs/{lang}':
+    get:
+      tags:
+        - Ontology
+      operationId: get_arche_core_ontologyjs_table
+      summary: 'GET /api/ontologyjs/{lang}'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/projectAssociatedDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_project_accociated_table
+      summary: 'Get Project Associated DT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/publicationsDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_publications_table
+      summary: 'Get Publications DT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/rootTable/{lang}':
+    get:
+      tags:
+        - Ontology
+      operationId: get_arche_core_root_table
+      summary: 'GET /api/rootTable/{lang}'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/rprDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_rpr_table
+      summary: 'Get Related Collections and Resources'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/smsearch/autocomplete/{str}':
+    get:
+      tags:
+        - SmartSearch
+      operationId: get_arche_core_smart_autocomplete_table
+      summary: 'Smartsearch autocomplete'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: str
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+  '/api/spatialDT/{id}/{lang}':
+    get:
+      tags:
+        - InverseData
+      operationId: get_arche_core_api_spatial_table
+      summary: 'Get Spatial DT'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/topcollections/{count}/{lang}':
+    get:
+      tags:
+        - Metadata
+      operationId: get_arche_api_topcollections
+      summary: 'Home Page slider data'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: count
+          in: path
+          required: true
+          schema:
+            type: integer
+            pattern: '[^\?]*'
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+  '/api/versions-list/{id}/{lang}':
+    get:
+      tags:
+        - Versions
+      operationId: get_arche_core_api_versions_list
+      summary: 'Get the resource versions List'
+      responses:
+        200:
+          description: 'Successful response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        default:
+          description: 'Error response'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        -
+          name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: '[^\?]*'
+            example: en
+

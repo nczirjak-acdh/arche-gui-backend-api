@@ -65,8 +65,6 @@ arche_core_api_versions_list:
         _permission: 'access content'
         _access: 'TRUE'            
 
-
-
 ## metadata datatables
 arche_core_api_rpr_table:    
     path: '/api/rprDT/{id}/{lang}'
@@ -106,7 +104,7 @@ arche_core_api_project_accociated_table:
         identifier: '^[^\?]*$'
         lang: '^[^\?]*$'
         _permission: 'access content'
-        _access: 'TRUE'            
+        _access: 'TRUE'
         
 arche_core_api_spatial_table:    
     path: '/api/spatialDT/{id}/{lang}'
