@@ -31,8 +31,6 @@ class ApiController extends AbstractController {
      * @param string $lang
      * @return JsonResponse
      */
-    
-    
     public function topCollections(int $count, string $lang = "en"): JsonResponse {
         
         $controller = new \App\Controller\MetadataController();
@@ -196,7 +194,7 @@ class ApiController extends AbstractController {
      * @return Response
      */
     public function smartSearch(): Response {
-        $controller = new \Drupal\arche_core_gui_api\Controller\SmartSearchController();
+        $controller = new \App\Controller\SmartSearchController();
         return $controller->search($_GET);
     }
     

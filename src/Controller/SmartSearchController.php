@@ -5,13 +5,9 @@ namespace App\Controller;
 use App\Service\ArcheContext;
 use App\Service\SmartSearchService;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use acdhOeaw\arche\lib\RepoDb;
-use acdhOeaw\arche\lib\SearchConfig;
-use acdhOeaw\arche\lib\SearchTerm;
-use zozlak\RdfConstants as RC;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Attribute\Route;
 
 class SmartSearchController extends \App\Controller\ArcheBaseController {
 
@@ -35,5 +31,25 @@ class SmartSearchController extends \App\Controller\ArcheBaseController {
         $data = $this->smartSearchService->smartSearchAutoComplete($str);
         return $data;
     }
+    
+    
+    public function search(Request $request): Response
+    
+    {
+        $postParams = [];
+        if ($request->getContent() !== '') {
+            $postParams = $request->toArray();
+        }
+        if (empty($postParams)) {
+            $postParams = $request->request->all();
+        }
+        if (empty($postParams)) {
+            $postParams = $request->query->all();
+        }
+
+        return $this->smartSearchService->search($postParams);
+    }
+    
+    
  
 }
