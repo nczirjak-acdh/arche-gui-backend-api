@@ -1,2 +1,3 @@
 arche_error.no_resource : "There is no resource"
 arche_error.provide_id : "Please provide an id"
+arche_error.no_data : "There is no data"

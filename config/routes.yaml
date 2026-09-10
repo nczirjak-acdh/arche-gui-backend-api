@@ -207,3 +207,12 @@ arche_core_api_smart_search:
     requirements:        
         _permission: 'access content'
         _access: 'TRUE'      
+        
+arche_core_api_frontend_statistics:
+    path: '/api/frontendStat/{lang}'
+    defaults:
+        _controller: '\App\Controller\MetadataController::frontendStat'
+    requirements:
+        lang: '^[^\?]*$' 
+        _permission: 'access content'
+        _access: 'TRUE'            

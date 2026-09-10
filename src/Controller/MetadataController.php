@@ -61,6 +61,16 @@ class MetadataController extends \App\Controller\ArcheBaseController {
         
     }
     
+    /**
+     * Get Arche Homepage metadata stats
+     * @param string $lang
+     * @return type
+     */
+    public function frontendStat(string $lang) {
+        $data = $this->metadataService->getFrontendStat($lang ?: $this->siteLang);
+        return $data;
+    }
+    
     
     
     

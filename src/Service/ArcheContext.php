@@ -14,7 +14,7 @@ class ArcheContext {
     private Config $config;
     private RepoDb $repoDb;
     private Ontology $ontology;
-    private PDO $pdo;
+    protected PDO $pdo;
     private Schema $schema;
 
     public function __construct(

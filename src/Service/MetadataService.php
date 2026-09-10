@@ -6,15 +6,18 @@ use zozlak\RdfConstants as RC;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizer;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use PDO;
 
 class MetadataService
 {
     protected $helper;
     private $repoDb; 
+    private PDO $pdo;
     
     public function __construct(private ArcheContext $arche, private TranslatorInterface $translator) {
         $this->helper = $this->helper = new \App\Helper\ArcheCoreHelper();
         $this->repoDb = $this->arche->getRepoDb();      
+        $this->pdo = $this->arche->getPdo();
         
     }
     
@@ -160,6 +163,45 @@ class MetadataService
 
         if (count((array) $result) == 0) {
             $message = $this->translator->trans('arche_error.no_resource', [], 'messages', $lang);
+            return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
+        }
+
+        return new JsonResponse($result, 200, ['Content-Type' => 'application/json']);
+    }
+    
+    /**
+     * Generate statistics data for the frontend
+     * @param string $lang
+     * @return JsonResponse
+     */
+    public function getFrontendStat(string $lang = "en"): JsonResponse {
+
+        $query= "
+            Select 
+                count(*) as topcol_count, sum(m2.value_n) as res_count, sum(m3.value_n) / (1::bigint << 40) as size_tb
+            From 
+                metadata m1 join metadata m2 using(id) join metadata m3 using(id)
+            Where
+                m1.property = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
+                and m1.value = 'https://vocabs.acdh.oeaw.ac.at/schema#TopCollection' 
+                and m2.property = 'https://vocabs.acdh.oeaw.ac.at/schema#hasNumberOfItems' 
+                and m3.property = 'https://vocabs.acdh.oeaw.ac.at/schema#hasBinarySize'
+            ;
+        ";
+        
+        $pdoStmnt = $this->pdo->prepare($query);
+        $pdoStmnt->execute();
+        $response = $pdoStmnt->fetch(PDO::FETCH_ASSOC);
+        $result = [];
+        
+        if(isset($response['topcol_count']) && isset($response['res_count']) && isset($response['size_tb'])) {
+            $result['topCollection'] = $response['topcol_count'];
+            $result['resources'] = $response['res_count'];
+            $result['size'] = $response['size_tb'];            
+        }
+        
+        if (count((array) $result) == 0) {
+            $message = $this->translator->trans('arche_error.no_data', [], 'messages', $lang);
             return new JsonResponse(array($message), 404, ['Content-Type' => 'application/json']);
         }
 
