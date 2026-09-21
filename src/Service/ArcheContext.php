@@ -8,6 +8,7 @@ use acdhOeaw\arche\lib\schema\Ontology;
 use acdhOeaw\arche\lib\Schema;
 use PDO;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Yaml\Yaml;
 
 class ArcheContext {
 
@@ -24,7 +25,7 @@ class ArcheContext {
         $pass = $_ENV['DB_PASS'];
         
         $configFile = $projectDir . '/src/arche-config/config-gui.yaml';
-        $this->config = Config::fromYaml($configFile);
+        $this->config = new Config(Yaml::parseFile($configFile, Yaml::PARSE_OBJECT_FOR_MAP));
 
         $this->pdo = new PDO($this->config->dbConnStr, $user, $pass);
 
