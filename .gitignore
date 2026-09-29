@@ -13,9 +13,11 @@
 /vendor/
 ###< symfony/framework-bundle ###
 /nbproject
+/nbproject/
 /bin
 /symfony.lock
 /composer.lock
 /nbproject
+.editorconfig
 
 
