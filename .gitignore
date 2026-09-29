@@ -16,5 +16,6 @@
 /bin
 /symfony.lock
 /composer.lock
+/nbproject
 
 
