@@ -12,7 +12,7 @@ controllers:
 
 ## homepage slider
 arche_api_topcollections:
-  path: '/api/topcollections/{count}/{lang}'
+  path: '/topcollections/{count}/{lang}'
   controller: 'App\Controller\MetadataController::getTopCollections'
   requirements:
     count: '^[^\?]*$'
@@ -22,7 +22,7 @@ arche_api_topcollections:
     
 ## metadata view main api    
 arche_core_api_expert:    
-  path: '/api/expert/{id}/{lang}'
+  path: '/expert/{id}/{lang}'
   defaults:
     _controller: 'App\Controller\MetadataController::getExpertData'
   requirements:
@@ -33,7 +33,7 @@ arche_core_api_expert:
 
 ## breadrcumb
 arche_core_api_breadcrumb:    
-  path: '/api/breadcrumb/{id}/{lang}'
+  path: '/breadcrumb/{id}/{lang}'
   defaults:
     _controller: 'App\Controller\MetadataController::getBreadcrumb'
   requirements:
@@ -44,7 +44,7 @@ arche_core_api_breadcrumb:
     
 ## metadata view child api
 arche_core_api_child_tree:    
-    path: '/api/child-tree/{id}/{lang}'
+    path: '/child-tree/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\ChildController::getChildTreeData'
     requirements:
@@ -53,10 +53,9 @@ arche_core_api_child_tree:
         _permission: 'access content'
         _access: 'TRUE'
 
-
 ## metadata view facets
 arche_core_api_versions_list:    
-    path: '/api/versions-list/{id}/{lang}'
+    path: '/versions-list/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\VersionsController::getVersionsList'
     requirements:
@@ -67,7 +66,7 @@ arche_core_api_versions_list:
 
 ## metadata datatables
 arche_core_api_rpr_table:    
-    path: '/api/rprDT/{id}/{lang}'
+    path: '/rprDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getRPRDT'
     requirements:
@@ -77,7 +76,7 @@ arche_core_api_rpr_table:
         _access: 'TRUE'         
       
 arche_core_api_publications_table:    
-    path: '/api/publicationsDT/{id}/{lang}'
+    path: '/publicationsDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getPublicationsDT'
     requirements:
@@ -87,7 +86,7 @@ arche_core_api_publications_table:
         _access: 'TRUE'    
         
 arche_core_api_collectionConcept_table:    
-    path: '/api/collectionConceptDT/{id}/{lang}'
+    path: '/collectionConceptDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getCollectionConceptDT'
     requirements:
@@ -97,7 +96,7 @@ arche_core_api_collectionConcept_table:
         _access: 'TRUE'            
         
 arche_core_api_project_accociated_table:    
-    path: '/api/projectAssociatedDT/{id}/{lang}'
+    path: '/projectAssociatedDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getProjectAssociatedDT'
     requirements:
@@ -107,7 +106,7 @@ arche_core_api_project_accociated_table:
         _access: 'TRUE'
         
 arche_core_api_spatial_table:    
-    path: '/api/spatialDT/{id}/{lang}'
+    path: '/spatialDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getSpatialDT'
     requirements:
@@ -117,7 +116,7 @@ arche_core_api_spatial_table:
         _access: 'TRUE'   
         
 arche_core_api_contributed_table:    
-    path: '/api/contributedDT/{id}/{lang}'
+    path: '/contributedDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getContributedDT'
     requirements:
@@ -127,7 +126,7 @@ arche_core_api_contributed_table:
         _access: 'TRUE'         
         
 arche_core_api_ispartof_table:    
-    path: '/api/isPartOfDT/{id}/{lang}'
+    path: '/isPartOfDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getIsPartOfDT'
     requirements:
@@ -137,7 +136,7 @@ arche_core_api_ispartof_table:
         _access: 'TRUE'          
         
 arche_core_api_involved_table:    
-    path: '/api/involvedDT/{id}/{lang}'
+    path: '/involvedDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getInvolvedDT'
     requirements:
@@ -147,7 +146,7 @@ arche_core_api_involved_table:
         _access: 'TRUE'        
         
 arche_core_api_hasmembers_table:    
-    path: '/api/hasMembersDT/{id}/{lang}'
+    path: '/hasMembersDT/{id}/{lang}'
     defaults:
         _controller: '\App\Controller\InverseDataController::getHasMembersDT'
     requirements:
@@ -157,7 +156,7 @@ arche_core_api_hasmembers_table:
         _access: 'TRUE'            
         
 arche_core_smart_autocomplete_table:    
-    path: '/api/smsearch/autocomplete/{str}'
+    path: '/smsearch/autocomplete/{str}'
     defaults:
         _controller: '\App\Controller\SmartSearchController::smartSearchAutoComplete'
         _format: 'json'
@@ -167,7 +166,7 @@ arche_core_smart_autocomplete_table:
         _access: 'TRUE'        
 ## not ready        
 arche_core_root_table:    
-    path: '/api/rootTable/{lang}'
+    path: '/rootTable/{lang}'
     defaults:
         _controller: '\App\Controller\OntologyController::rootTable'
         _format: 'json'
@@ -178,7 +177,7 @@ arche_core_root_table:
                   
 ## not ready
 arche_core_ontologyjs_table:    
-    path: '/api/ontologyjs/{lang}'
+    path: '/ontologyjs/{lang}'
     defaults:
         _controller: '\App\Controller\OntologyController::ontologyJs'
         _format: 'json'
@@ -188,7 +187,7 @@ arche_core_ontologyjs_table:
         _access: 'TRUE'      
 
 arche_core_api_next_prev_item:    
-    path: '/api/nextPrevItem/{rootId}/{resourceId}/{lang}'
+    path: '/nextPrevItem/{rootId}/{resourceId}/{lang}'
     defaults:
         _controller: '\App\Controller\ChildController::getNextPrevItem'
     requirements:
@@ -199,7 +198,7 @@ arche_core_api_next_prev_item:
         _access: 'TRUE'                  
 
 arche_core_api_smart_search:    
-    path: '/api/smartsearch'
+    path: '/smartsearch'
     methods: [GET, POST]
     defaults:
         _controller: '\App\Controller\SmartSearchController::search'
@@ -209,7 +208,7 @@ arche_core_api_smart_search:
         _access: 'TRUE'      
         
 arche_core_api_frontend_statistics:
-    path: '/api/frontendStat/{lang}'
+    path: '/frontendStat/{lang}'
     defaults:
         _controller: '\App\Controller\MetadataController::frontendStat'
     requirements:
@@ -218,7 +217,7 @@ arche_core_api_frontend_statistics:
         _access: 'TRUE'            
 
 arche_core_api_software_versions:
-    path: '/api/software_versions'
+    path: '/software_versions'
     methods: [GET]
     defaults:
         _controller: '\App\Controller\SoftwareVersionsController::softwareVersions'
