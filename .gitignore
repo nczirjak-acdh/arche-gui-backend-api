@@ -14,10 +14,11 @@
 ###< symfony/framework-bundle ###
 /nbproject
 /nbproject/
-/bin
+/bin/*
+!/bin/console
 /symfony.lock
 /composer.lock
 /nbproject
 .editorconfig
-
+/log/ontology.cache
 

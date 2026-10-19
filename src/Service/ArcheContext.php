@@ -21,13 +21,11 @@ class ArcheContext {
     public function __construct(
             #[Autowire('%kernel.project_dir%')] string $projectDir,
     ) {
-        $user = $_ENV['DB_USER'];
-        $pass = $_ENV['DB_PASS'];
         
         $configFile = $projectDir . '/src/arche-config/config-gui.yaml';
         $this->config = new Config(Yaml::parseFile($configFile, Yaml::PARSE_OBJECT_FOR_MAP));
 
-        $this->pdo = new PDO($this->config->dbConnStr, $user, $pass);
+        $this->pdo = new PDO($this->config->dbConnStr);
 
         $baseUrl = $this->config->rest->urlBase . $this->config->rest->pathBase;
         $this->schema = new Schema($this->config->schema);
