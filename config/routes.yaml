@@ -163,8 +163,7 @@ arche_core_smart_autocomplete_table:
     requirements:
         str: '^[^\?]*$'
         _permission: 'access content'
-        _access: 'TRUE'        
-## not ready        
+        _access: 'TRUE'             
 arche_core_root_table:    
     path: '/rootTable/{lang}'
     defaults:
@@ -175,7 +174,6 @@ arche_core_root_table:
         _permission: 'access content'
         _access: 'TRUE'      
                   
-## not ready
 arche_core_ontologyjs_table:    
     path: '/ontologyjs/{lang}'
     defaults:
@@ -185,6 +183,17 @@ arche_core_ontologyjs_table:
         lang: '^[^\?]*$'
         _permission: 'access content'
         _access: 'TRUE'      
+        
+arche_core_accepted_formats_table:    
+    path: '/accepted-formats-table/{lang} '
+    defaults:
+        _controller: '\App\Controller\OntologyController::getAcceptedFormatsTable'
+        _format: 'json'
+    requirements:
+        lang: '^[^\?]*$'
+        _permission: 'access content'
+        _access: 'TRUE'           
+       
 
 arche_core_api_next_prev_item:    
     path: '/nextPrevItem/{rootId}/{resourceId}/{lang}'

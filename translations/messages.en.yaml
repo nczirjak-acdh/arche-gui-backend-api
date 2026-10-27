@@ -1,3 +1,6 @@
 arche_error.no_resource : "There is no resource"
 arche_error.provide_id : "Please provide an id"
 arche_error.no_data : "There is no data"
+accepted_formats.extension: "EXTENSION"
+accepted_formats.format_name_version: "FORMAT NAME & VERSION"
+accepted_formats.preference: "PREFERENCE"

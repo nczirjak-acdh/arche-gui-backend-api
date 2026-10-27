@@ -15,6 +15,7 @@ class OntologyService
     private $rootTableHelper;
     private $ontologyJsHelper;
     private $rootTableData = [];
+    private $acceptedFormatsHelper;
     
     
     private static $actors_involved = array(
@@ -73,6 +74,7 @@ class OntologyService
         
         $this->rootTableHelper = new \App\Helper\RootTableHelper();
         $this->ontologyJsHelper = new \App\Helper\OntologyJsHelper();
+        $this->acceptedFormatsHelper = new \App\Helper\AcceptedFormatsHelper($translator);
     }
         
     
@@ -206,6 +208,39 @@ class OntologyService
         return $result;
     }
     
+    
+    public function getAcceptedFormatsTable(string $lang): Response {
+        $formats = \acdhOeaw\ArcheFileFormats::getAll();
+        $table = [];
+        foreach ($formats as $i) {
+            if (empty($i->ARCHE_conformance ?? '') || empty($i->ARCHE_category ?? '')) {
+                continue;
+            }
+            $group = explode('/', $i->ARCHE_category);
+            $group = end($group);
+            $table[$group][] = [implode(', ', $i->extensions), $i->name, $i->ARCHE_conformance];
+        }
+        foreach ($table as &$v) {
+            usort($v, fn($x, $y) => $x[0] <=> $y[0]);
+        }
+        unset($v);
+      
+        if (count($table) === 0) {
+            return new \Symfony\Component\HttpFoundation\Response("There is no data", 404, ['Content-Type' => 'application/json']);
+        }
+
+        $html = "";
+        $html = $this->acceptedFormatsHelper->createHtml($table, $lang);
+
+        if (empty($html)) {
+            return new \Symfony\Component\HttpFoundation\Response("There is no data", 404, ['Content-Type' => 'application/json']);
+        }
+        $response = new \Symfony\Component\HttpFoundation\Response();
+        $response->setContent($html);
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Type', 'text/html');
+        return $response;
+    }
     
 
 }

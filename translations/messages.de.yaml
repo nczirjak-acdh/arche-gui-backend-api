@@ -1,3 +1,6 @@
 arche_error.no_resource : "Es gibt keine Ressource"
 arche_error.provide_id : "Bitte geben Sie eine ID an"
 arche_error.no_data : "Es gibt keine Daten"
+accepted_formats.extension: "DATEIENDUNG"
+accepted_formats.format_name_version: "FORMATNAME & VERSION"
+accepted_formats.preference: "PRÄFERENZ"
