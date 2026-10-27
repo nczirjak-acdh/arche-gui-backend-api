@@ -168,7 +168,7 @@ arche_core_smart_autocomplete_table:
 arche_core_root_table:    
     path: '/rootTable/{lang}'
     defaults:
-        _controller: '\App\Controller\OntologyController::rootTable'
+        _controller: '\App\Controller\OntologyController::getRootTable'
         _format: 'json'
     requirements:
         lang: '^[^\?]*$'
@@ -179,7 +179,7 @@ arche_core_root_table:
 arche_core_ontologyjs_table:    
     path: '/ontologyjs/{lang}'
     defaults:
-        _controller: '\App\Controller\OntologyController::ontologyJs'
+        _controller: '\App\Controller\OntologyController::getOntologyTable'
         _format: 'json'
     requirements:
         lang: '^[^\?]*$'

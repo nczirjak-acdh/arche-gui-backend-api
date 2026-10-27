@@ -24,6 +24,11 @@ class OntologyController extends \App\Controller\ArcheBaseController {
         parent::__construct($arche, $rs);       
     }
     
+    public function getOntologyTable(string $lang = "en") {
+        $data = $this->ontologyService->getOntologyJs($lang ?: $this->siteLang);
+        return $data;
+    }
+    
 
     public function getAcceptedFormats(string $lang): Response {
         $formats = \acdhOeaw\ArcheFileFormats::getAll();
@@ -50,6 +55,20 @@ class OntologyController extends \App\Controller\ArcheBaseController {
 
         if (empty($html)) {
             return new \Symfony\Component\HttpFoundation\Response("There is no data", 404, ['Content-Type' => 'application/json']);
+        }
+        $response = new \Symfony\Component\HttpFoundation\Response();
+        $response->setContent($html);
+        $response->setStatusCode(200);
+        $response->headers->set('Content-Type', 'text/html');
+        return $response;
+    }
+    
+    
+    public function getRootTable(string $lang = "en"): Response {
+        $html = $this->ontologyService->getRootTable($lang ?: $this->siteLang);
+        
+        if (empty($html)) {
+            return new \Symfony\Component\HttpFoundation\Response("There is no resource", 404, ['Content-Type' => 'application/json']);
         }
         $response = new \Symfony\Component\HttpFoundation\Response();
         $response->setContent($html);
