@@ -51,5 +51,20 @@ class SmartSearchController extends \App\Controller\ArcheBaseController {
     }
     
     
+    /**
+     * Return the unfiltered smart search response with all configured facets.
+     */
+    public function refetchAllFacets(string $lang = "en"): Response {
+        $postParams = [
+            'q' => '',
+            'preferredLang' => $lang,
+            'includeBinaries' => 0,
+            'linkNamedEntities' => 1,
+            'page' => 1,
+        ];
+        return $this->smartSearchService->search($postParams);
+    }
+    
+    
  
 }
