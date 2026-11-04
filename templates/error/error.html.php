@@ -22,6 +22,7 @@
         pre { margin-bottom: 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; font-size: 14px; }
         footer { display: flex; align-items: center; justify-content: space-between; gap: 32px; max-width: 760px; margin: 64px auto 0; text-align: left; }
         .brand { font-size: 36px; letter-spacing: 4px; }
+        .brand img { display: block; width: 250px; max-width: 100%; height: auto; }
         .brand span { color: #35818d; }
         .brand small { display: block; margin-top: 10px; font-size: 14px; letter-spacing: 0; color: #595959; }
         .actions { display: grid; gap: 12px; min-width: 250px; }
@@ -54,7 +55,7 @@
         </div>
     </details>
     <footer>
-        <div class="brand">ARC<span>HE</span><small>A Resource Centre for the HumanitiEs</small></div>
+        <div class="brand"><img src="<?= $escape($request->getBasePath() . '/arche_transparent_header.svg') ?>" alt="ARCHE"></div>
         <nav class="actions" aria-label="Helpful links">
             <a href="https://arche.acdh.oeaw.ac.at/">VISIT ARCHE WEBSITE</a>
         </nav>
