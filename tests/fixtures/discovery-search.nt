@@ -1,0 +1,15 @@
+<https://arche.example.test/configured/api/22> <https://vocabs.acdh.oeaw.ac.at/schema#hasTitle> "Related record only"@en .
+<https://arche.example.test/configured/api/2> <https://vocabs.acdh.oeaw.ac.at/schema#hasTitle> "Zweite Sammlung"@de .
+<https://arche.example.test/configured/api/2> <https://vocabs.acdh.oeaw.ac.at/schema#hasTitle> "Second collection"@en .
+<https://arche.example.test/configured/api/2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://vocabs.acdh.oeaw.ac.at/schema#TopCollection> .
+<https://arche.example.test/configured/api/2> <search://order> "2"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://arche.example.test/configured/api/2> <search://match> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<https://arche.example.test/configured/api/2> <https://vocabs.acdh.oeaw.ac.at/schema#isPartOf> <https://arche.example.test/configured/api/22> .
+<https://arche.example.test/configured/api/1> <search://match> "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+<https://arche.example.test/configured/api/1> <search://order> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://arche.example.test/configured/api/1> <https://vocabs.acdh.oeaw.ac.at/schema#hasTitle> "First collection"@en .
+<https://arche.example.test/configured/api/1> <https://vocabs.acdh.oeaw.ac.at/schema#hasDescription> "Letters with \"quotes\", \u00e9 and \U0001F600\nNext line"@en .
+<https://arche.example.test/configured/api/1> <search://fts1> "[[ARCHE_HIT]]Letters[[/ARCHE_HIT]] with quotes"@en .
+<https://arche.example.test/configured/api/1> <search://ftsProperty1> <https://vocabs.acdh.oeaw.ac.at/schema#hasDescription> .
+<https://arche.example.test/configured/api/1> <search://ftsQuery1> "Letters" .
+<https://arche.example.test/configured/api/> <search://count> "41"^^<http://www.w3.org/2001/XMLSchema#integer> .

@@ -21,4 +21,8 @@
 /nbproject
 .editorconfig
 /log/ontology.cache
+/src/arche-config/config-gui.yaml
+
+# macOS metadata in every directory
+.DS_Store
 
