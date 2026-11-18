@@ -10,7 +10,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 /** Reads the import snapshot. Co-occurrence suggestions do not expand the query. */
 final class Vocabulary
 {
-    public const DEFAULT_PATH = 'var/discovery/topics.sqlite';
+    public const DEFAULT_PATH = 'smsdb/topics.sqlite';
 
     public readonly string $path;
 

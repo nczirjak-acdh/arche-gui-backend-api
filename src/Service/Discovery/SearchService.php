@@ -11,6 +11,7 @@ final class SearchService
     public const SCHEMA = 'https://vocabs.acdh.oeaw.ac.at/schema#';
     public const RDF_TYPE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type';
 
+    private const XSD_DATE = 'http://www.w3.org/2001/XMLSchema#date';
     private const TITLE = self::SCHEMA . 'hasTitle';
     private const DESCRIPTION = self::SCHEMA . 'hasDescription';
     private const STOP_WORDS = 'the an and or of in for with find looking show me i want der die das und oder von im mit ich suche';
@@ -30,6 +31,8 @@ final class SearchService
         'hasCoverageEndDate' => 'Coverage end',
         'hasCreatedStartDate' => 'Creation start',
         'hasCreatedEndDate' => 'Creation end',
+        'hasCreatedStartDateOriginal' => 'Original creation start',
+        'hasCreatedEndDateOriginal' => 'Original creation end',
         'hasLanguage' => 'Language',
         'hasCategory' => 'Category',
         'isPartOf' => 'Parent collection',
@@ -52,18 +55,19 @@ final class SearchService
         $started = hrtime(true);
         $vocabulary = $this->vocabulary->analyze($input->query);
         $expansions = $input->mode === 'expanded' ? $vocabulary['expansions'] : [];
-        $expression = $input->mode === 'expanded'
+        $hasQuery = $input->query !== '';
+        $expression = $hasQuery && $input->mode === 'expanded'
             ? $this->expandedExpression($input->query, $expansions)
             : $input->query;
-        $properties = array_map(
+        $properties = $hasQuery ? array_map(
             static fn (string $property): string => self::SCHEMA . $property,
             SearchInput::SCOPES[$input->scope],
-        );
+        ) : [];
         $offset = ($input->page - 1) * SearchInput::PAGE_SIZE;
         $parameters = $this->metadataParameters() + [
-            'operator' => ['@@'],
-            'value' => [$expression],
-            'property' => [$properties],
+            'operator' => $hasQuery ? ['@@'] : [],
+            'value' => $hasQuery ? [$expression] : [],
+            'property' => $hasQuery ? [$properties] : [],
             'orderBy' => [self::TITLE],
             'limit' => SearchInput::PAGE_SIZE,
             'offset' => $offset,
@@ -74,6 +78,27 @@ final class SearchService
             $parameters['property'][] = self::RDF_TYPE;
             $parameters['operator'][] = '=';
             $parameters['value'][] = self::SCHEMA . $input->kind;
+        }
+
+        $dateFilter = null;
+        if ($input->dateFrom !== null || $input->dateTo !== null) {
+            $dateFilter = ['type' => $input->dateType, 'from' => $input->dateFrom, 'to' => $input->dateTo];
+            $dateFields = array_map(
+                static fn (string $property): string => self::SCHEMA . $property,
+                SearchInput::DATE_FIELDS[$input->dateType],
+            );
+            // Each bound can match either endpoint. For paired dates this tests overlap,
+            // and a record with just one endpoint is treated as a single date.
+            foreach (['>=' => $input->dateFrom, '<=' => $input->dateTo] as $operator => $date) {
+                if ($date === null) {
+                    continue;
+                }
+                $index = count($parameters['property']);
+                $parameters['property'][] = $dateFields;
+                $parameters['operator'][] = $operator;
+                $parameters['value'][] = $date;
+                $parameters['type'][$index] = self::XSD_DATE;
+            }
         }
 
         $graph = $this->fetchGraph('POST', '/search', $parameters);
@@ -118,6 +143,7 @@ final class SearchService
             'expression' => $expression,
             'vocabulary' => $vocabulary,
             'searched_properties' => $properties,
+            'date_filter' => $dateFilter,
             'api_url' => $this->client->baseUrl . '/search?' . http_build_query($parameters, '', '&', PHP_QUERY_RFC3986),
             'fetched_at' => gmdate(DATE_ATOM),
             'sort' => 'title',

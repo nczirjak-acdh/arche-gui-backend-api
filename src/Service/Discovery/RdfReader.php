@@ -13,8 +13,9 @@ final class RdfReader
         ~^\h*(<[^>]*>|_:\S+)\h+<([^>]*)>\h+(.+?)\h*\.\h*(?:\#.*)?\h*\r?$~u
         REGEX;
 
+    // Consume plain text in runs so long descriptions do not exhaust the PCRE JIT stack.
     private const LITERAL = <<<'REGEX'
-        ~^"((?:[^"\\]|\\(?:[tbnrf"'\x5c]|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8}))*)"(?:@([a-zA-Z]+(?:-[a-zA-Z0-9]+)*)|\^\^<([^>]*)>)?$~u
+        ~^"((?:[^"\\\r\n]++|\\(?:[tbnrf"'\x5c]|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8}))*+)"(?:@([a-zA-Z]+(?:-[a-zA-Z0-9]+)*)|\^\^<([^>]*)>)?$~u
         REGEX;
 
     public function graph(string $body): array

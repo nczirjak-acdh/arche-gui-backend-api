@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace App\Service\Discovery;
 
 use acdhOeaw\arche\lib\RepoDb;
+use App\Service\ArcheContext;
+use Closure;
 use Generator;
 use PDO;
 use PDOException;
 use RuntimeException;
+use Symfony\Component\DependencyInjection\Attribute\AutowireServiceClosure;
+use Symfony\Component\Yaml\Exception\ParseException;
 
 /** Streams public ARCHE vocabulary metadata directly from PostgreSQL. */
 final class PostgresVocabularySource
@@ -17,6 +21,8 @@ final class PostgresVocabularySource
 
     public function __construct(
         private readonly ArcheConfiguration $configuration,
+        #[AutowireServiceClosure(ArcheContext::class)]
+        private readonly Closure $archeContext,
     ) {
     }
 
@@ -27,10 +33,12 @@ final class PostgresVocabularySource
             throw new RuntimeException('The PHP PDO PostgreSQL driver (pdo_pgsql) is required.');
         }
 
-        $config = $this->configuration->load($configFile);
-        $dsn = $config['dbConnStr'] ?? $config['dbConn']['guest'] ?? null;
-        if (!is_string($dsn) || !str_starts_with($dsn, 'pgsql:')) {
-            throw new RuntimeException('The ARCHE configuration must contain a PostgreSQL DSN in dbConnStr or dbConn.guest.');
+        [$db, $config] = $this->connection($configFile);
+        if ($db->getAttribute(PDO::ATTR_DRIVER_NAME) !== 'pgsql') {
+            throw new RuntimeException('The ARCHE context must provide a PostgreSQL connection.');
+        }
+        if ($db->inTransaction()) {
+            throw new RuntimeException('The ARCHE PostgreSQL connection already has an open transaction.');
         }
 
         $acl = $config['accessControl']['schema']['read'] ?? $config['schema']['aclRead'] ?? null;
@@ -40,13 +48,6 @@ final class PostgresVocabularySource
         }
 
         $url = $this->configuration->baseUrl($config) . '/';
-
-        try {
-            $db = new PDO($dsn, options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-        } catch (PDOException) {
-            // The DSN can contain a password. Keep it out of console errors and snapshots.
-            throw new RuntimeException('Could not connect to PostgreSQL using the ARCHE configuration.');
-        }
 
         try {
             $db->beginTransaction();
@@ -83,6 +84,66 @@ final class PostgresVocabularySource
                 $db->rollBack();
             }
         }
+    }
+
+    /** @return array{PDO, array} */
+    private function connection(?string $configFile): array
+    {
+        try {
+            // Open the same connection as the backend only when the PostgreSQL mode runs.
+            if ($configFile === null) {
+                $context = ($this->archeContext)();
+                return [$context->getPdo(), $context->getConfig()->asArray()];
+            }
+
+            $config = $this->configuration->load($configFile);
+            $dsn = $config['dbConnStr'] ?? $config['dbConn']['guest'] ?? null;
+            if (!is_string($dsn) || !str_starts_with($dsn, 'pgsql:')) {
+                throw new RuntimeException(
+                    'The alternate ARCHE configuration must contain a PostgreSQL DSN in dbConnStr or dbConn.guest.',
+                );
+            }
+
+            return [new PDO($dsn, options: [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]), $config];
+        } catch (ParseException) {
+            throw new RuntimeException('Could not read the ARCHE YAML configuration. Check the file and its syntax.');
+        } catch (PDOException $error) {
+            throw new RuntimeException(sprintf(
+                'Could not initialize the ARCHE PostgreSQL connection (PDO code %s). %s',
+                $error->getCode(),
+                $this->connectionFailure($error),
+            ));
+        }
+    }
+
+    private function connectionFailure(PDOException $error): string
+    {
+        // Match the driver error, then return a fixed message to keep the DSN out of the console.
+        $message = strtolower($error->getMessage());
+        $sqlState = $error->errorInfo[0] ?? $error->getCode();
+
+        return match (true) {
+            str_contains($message, 'pg_hba.conf') =>
+                'PostgreSQL client access rules rejected this connection. Check the CLI host and PostgreSQL access rules.',
+            str_contains($message, 'no password supplied') =>
+                'PostgreSQL requires a password, but this CLI process supplied none. Check the service account and its password configuration.',
+            str_contains($message, 'authentication failed') =>
+                'PostgreSQL authentication failed. Check the database role and credentials used by this CLI process.',
+            preg_match('/\brole\b[^\r\n]*(?:does not exist|not permitted to log in)/', $message) === 1 =>
+                'The PostgreSQL role is missing or cannot log in. Check which role the CLI uses.',
+            $sqlState === '3D000' || preg_match('/\bdatabase\b[^\r\n]*does not exist/', $message) === 1 =>
+                'The configured PostgreSQL database does not exist on the selected server.',
+            $sqlState === '42501' =>
+                'PostgreSQL denied access. Check the permissions of the role used by the backend.',
+            str_contains($message, 'could not translate host name') =>
+                'The PostgreSQL hostname could not be resolved. Run the command in the backend network or container.',
+            preg_match('/\b(?:ssl|tls|certificate)\b[^\r\n]*(?:failed|error|invalid|does not|could not|no such|required)/', $message) === 1 =>
+                'PostgreSQL TLS setup failed. Check the backend TLS settings and certificate files available to the CLI.',
+            preg_match('/connection refused|timed out|no route to host|network is unreachable|no such file or directory/', $message) === 1 =>
+                'The CLI could not reach the PostgreSQL server or socket. Check the configured host and port from the backend network or container.',
+            default =>
+                'Check the PostgreSQL server log and run the command in the same environment and as the same service account as the backend.',
+        };
     }
 
     private function openCursor(PDO $db, string $acl, string $role): void

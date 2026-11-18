@@ -74,6 +74,8 @@ final class DiscoveryController
             'kinds' => SearchInput::KINDS,
             'modes' => SearchInput::MODES,
             'scopes' => array_keys(SearchInput::SCOPES),
+            'date_types' => array_keys(SearchInput::DATE_FIELDS),
+            'default_date_type' => SearchInput::DEFAULT_DATE_TYPE,
             'languages' => SearchInput::LANGUAGES,
             'page_size' => SearchInput::PAGE_SIZE,
             'max_page' => SearchInput::MAX_PAGE,

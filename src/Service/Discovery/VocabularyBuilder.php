@@ -45,23 +45,24 @@ final class VocabularyBuilder
     private function publish(Generator $statements, string $destination, array $sourceStats): array
     {
         $directory = dirname($destination);
-        if (!is_dir($directory) && !mkdir($directory, 0775, true) && !is_dir($directory)) {
-            throw new RuntimeException('Could not create the vocabulary directory.');
+        if (!is_dir($directory) && !@mkdir($directory, 0775, true) && !is_dir($directory)) {
+            throw new RuntimeException(sprintf('Could not create the vocabulary directory "%s".', $directory));
+        }
+        if (!is_writable($directory)) {
+            throw new RuntimeException(sprintf('The vocabulary directory "%s" must be writable by the command user.', $directory));
         }
 
-        $lock = fopen($destination . '.lock', 'c');
+        $lockPath = $destination . '.lock';
+        $lock = @fopen($lockPath, 'c');
         if ($lock === false) {
-            throw new RuntimeException('Could not open the vocabulary build lock.');
+            throw new RuntimeException(sprintf('Could not open the vocabulary build lock "%s". Check its ownership and permissions.', $lockPath));
         }
         $temporary = null;
         try {
             if (!flock($lock, LOCK_EX | LOCK_NB)) {
                 throw new RuntimeException('A vocabulary build is already running.');
             }
-            $temporary = tempnam($directory, 'topics-');
-            if ($temporary === false) {
-                throw new RuntimeException('Could not create the vocabulary build file.');
-            }
+            $temporary = $this->createTemporarySnapshot($directory);
             $started = hrtime(true);
             $db = new PDO('sqlite:' . $temporary);
             $this->createSchema($db);
@@ -104,10 +105,9 @@ final class VocabularyBuilder
             }
             unset($insert, $db);
 
-            // tempnam creates an owner-only file. The published snapshot is a read-only input
-            // for the web process, which may run under a different account.
-            if (!chmod($temporary, 0644) || !rename($temporary, $destination)) {
-                throw new RuntimeException('Could not publish the vocabulary snapshot.');
+            // The published snapshot is readable by the web process, which may run under another account.
+            if (!@chmod($temporary, 0644) || !@rename($temporary, $destination)) {
+                throw new RuntimeException(sprintf('Could not publish the vocabulary snapshot to "%s".', $destination));
             }
             return $stats;
         } finally {
@@ -116,6 +116,25 @@ final class VocabularyBuilder
             }
             fclose($lock);
         }
+    }
+
+    private function createTemporarySnapshot(string $directory): string
+    {
+        // Create the private file on the destination filesystem so publication is atomic.
+        $path = $directory . '/topics-' . bin2hex(random_bytes(16)) . '.sqlite.tmp';
+        $mask = umask(0077);
+        try {
+            $file = @fopen($path, 'xb');
+        } finally {
+            umask($mask);
+        }
+
+        if ($file === false) {
+            throw new RuntimeException(sprintf('Could not create a temporary vocabulary file in "%s". Check permissions and free space.', $directory));
+        }
+        fclose($file);
+
+        return $path;
     }
 
     private function rdfStatements(string $source): Generator
